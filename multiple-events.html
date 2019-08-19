@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Multiple Events | Probability, Risk, and Reward</title>
+  <meta name="description" content="Probability and genetics, genetics and probability, free open-source book written in Rstudio with bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Multiple Events | Probability, Risk, and Reward" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Probability and genetics, genetics and probability, free open-source book written in Rstudio with bookdown::gitbook." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Multiple Events | Probability, Risk, and Reward" />
+  
+  <meta name="twitter:description" content="Probability and genetics, genetics and probability, free open-source book written in Rstudio with bookdown::gitbook." />
+  
+
+<meta name="author" content="Bill Bynum" />
+
+
+<meta name="date" content="2019-08-18" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="probability-basics.html">
+<link rel="next" href="tree-diagrams.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Probability and Genetics</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#motivation"><i class="fa fa-check"></i><b>0.1</b> Motivation</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#about-the-authors"><i class="fa fa-check"></i><b>0.2</b> About the Authors</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="probability-basics.html"><a href="probability-basics.html"><i class="fa fa-check"></i><b>1</b> Probability Basics</a><ul>
+<li class="chapter" data-level="1.1" data-path="probability-basics.html"><a href="probability-basics.html#introduction"><i class="fa fa-check"></i><b>1.1</b> Introduction</a></li>
+<li class="chapter" data-level="1.2" data-path="probability-basics.html"><a href="probability-basics.html#chapter_scenario"><i class="fa fa-check"></i><b>1.2</b> Chapter Scenario - The Three-Spot Card Game</a></li>
+<li class="chapter" data-level="1.3" data-path="probability-basics.html"><a href="probability-basics.html#terminology"><i class="fa fa-check"></i><b>1.3</b> Terminology</a></li>
+<li class="chapter" data-level="1.4" data-path="probability-basics.html"><a href="probability-basics.html#example_tossing_a_die"><i class="fa fa-check"></i><b>1.4</b> Example - Tossing a Die</a></li>
+<li class="chapter" data-level="1.5" data-path="probability-basics.html"><a href="probability-basics.html#simple_events"><i class="fa fa-check"></i><b>1.5</b> Simple Events</a></li>
+<li class="chapter" data-level="1.6" data-path="probability-basics.html"><a href="probability-basics.html#the_complement"><i class="fa fa-check"></i><b>1.6</b> The Complement</a><ul>
+<li class="chapter" data-level="1.6.1" data-path="probability-basics.html"><a href="probability-basics.html#the-complement-principle"><i class="fa fa-check"></i><b>1.6.1</b> The Complement Principle</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="probability-basics.html"><a href="probability-basics.html#compound_events_and"><i class="fa fa-check"></i><b>1.7</b> Compound Events: And</a><ul>
+<li class="chapter" data-level="1.7.1" data-path="probability-basics.html"><a href="probability-basics.html#mutually-exclusive-events"><i class="fa fa-check"></i><b>1.7.1</b> Mutually Exclusive Events</a></li>
+</ul></li>
+<li class="chapter" data-level="1.8" data-path="probability-basics.html"><a href="probability-basics.html#compound_events_or"><i class="fa fa-check"></i><b>1.8</b> Compound Events: Or</a><ul>
+<li class="chapter" data-level="1.8.1" data-path="probability-basics.html"><a href="probability-basics.html#minding-the-overlap"><i class="fa fa-check"></i><b>1.8.1</b> Minding the Overlap</a></li>
+</ul></li>
+<li class="chapter" data-level="1.9" data-path="probability-basics.html"><a href="probability-basics.html#compound_events_conditional_probability"><i class="fa fa-check"></i><b>1.9</b> Compound Events: Conditional Probability</a><ul>
+<li class="chapter" data-level="1.9.1" data-path="probability-basics.html"><a href="probability-basics.html#observations-about-conditional-probability"><i class="fa fa-check"></i><b>1.9.1</b> Observations about Conditional Probability</a></li>
+</ul></li>
+<li class="chapter" data-level="1.10" data-path="probability-basics.html"><a href="probability-basics.html#three_spot_card_game_revisited"><i class="fa fa-check"></i><b>1.10</b> The Three-Spot Card Game Revisited</a></li>
+<li class="chapter" data-level="1.11" data-path="probability-basics.html"><a href="probability-basics.html#exercises"><i class="fa fa-check"></i><b>1.11</b> Exercises</a><ul>
+<li class="chapter" data-level="1.11.1" data-path="probability-basics.html"><a href="probability-basics.html#exercise---the-monty-hall-problem"><i class="fa fa-check"></i><b>1.11.1</b> Exercise - The Monty Hall Problem</a></li>
+<li class="chapter" data-level="1.11.2" data-path="probability-basics.html"><a href="probability-basics.html#exercise---twelve-sided-die"><i class="fa fa-check"></i><b>1.11.2</b> Exercise - Twelve-sided Die</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="multiple-events.html"><a href="multiple-events.html"><i class="fa fa-check"></i><b>2</b> Multiple Events</a><ul>
+<li class="chapter" data-level="2.1" data-path="multiple-events.html"><a href="multiple-events.html#introduction_multiple_events"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="multiple-events.html"><a href="multiple-events.html#chapter_scenario_the_game_of_diff"><i class="fa fa-check"></i><b>2.2</b> Chapter Scenario - The Game of Diff</a></li>
+<li class="chapter" data-level="2.3" data-path="multiple-events.html"><a href="multiple-events.html#example---pair-of-dice"><i class="fa fa-check"></i><b>2.3</b> Example - Pair of Dice</a></li>
+<li class="chapter" data-level="2.4" data-path="multiple-events.html"><a href="multiple-events.html#fundamental_counting_principle"><i class="fa fa-check"></i><b>2.4</b> Fundamental Counting Principle</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="multiple-events.html"><a href="multiple-events.html#practice"><i class="fa fa-check"></i><b>2.4.1</b> Practice</a></li>
+<li class="chapter" data-level="2.4.2" data-path="multiple-events.html"><a href="multiple-events.html#practice-1"><i class="fa fa-check"></i><b>2.4.2</b> Practice</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="multiple-events.html"><a href="multiple-events.html#example_galileo_dice_problem"><i class="fa fa-check"></i><b>2.5</b> Example - Galileo’s Dice Problem</a></li>
+<li class="chapter" data-level="2.6" data-path="multiple-events.html"><a href="multiple-events.html#chapter_scenario_revisited_the_game_of_diff"><i class="fa fa-check"></i><b>2.6</b> Chapter Scenario Revisited - The Game of Diff</a></li>
+<li class="chapter" data-level="2.7" data-path="probability-basics.html"><a href="probability-basics.html#exercises"><i class="fa fa-check"></i><b>2.7</b> Exercises</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="multiple-events.html"><a href="multiple-events.html#exercise---my-die-your-die"><i class="fa fa-check"></i><b>2.7.1</b> Exercise - My Die, Your Die</a></li>
+<li class="chapter" data-level="2.7.2" data-path="multiple-events.html"><a href="multiple-events.html#exercise---three-dice"><i class="fa fa-check"></i><b>2.7.2</b> Exercise - Three Dice</a></li>
+<li class="chapter" data-level="2.7.3" data-path="multiple-events.html"><a href="multiple-events.html#exercise---de-morgans-laws"><i class="fa fa-check"></i><b>2.7.3</b> Exercise - De Morgan’s Laws</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="tree-diagrams.html"><a href="tree-diagrams.html"><i class="fa fa-check"></i><b>3</b> Tree Diagrams</a><ul>
+<li class="chapter" data-level="3.1" data-path="probability-basics.html"><a href="probability-basics.html#introduction"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="tree-diagrams.html"><a href="tree-diagrams.html#chapter_scenario_kitty_litter"><i class="fa fa-check"></i><b>3.2</b> Chapter Scenario - Kitty Litter</a></li>
+<li class="chapter" data-level="3.3" data-path="tree-diagrams.html"><a href="tree-diagrams.html#example_flipping_two_coins"><i class="fa fa-check"></i><b>3.3</b> Example - Flipping Two Coins</a></li>
+<li class="chapter" data-level="3.4" data-path="tree-diagrams.html"><a href="tree-diagrams.html#terminology_review"><i class="fa fa-check"></i><b>3.4</b> Terminology Review</a></li>
+<li class="chapter" data-level="3.5" data-path="tree-diagrams.html"><a href="tree-diagrams.html#simulation"><i class="fa fa-check"></i><b>3.5</b> Simulation</a></li>
+<li class="chapter" data-level="3.6" data-path="tree-diagrams.html"><a href="tree-diagrams.html#tree_diagrams"><i class="fa fa-check"></i><b>3.6</b> Tree Diagrams</a></li>
+<li class="chapter" data-level="3.7" data-path="tree-diagrams.html"><a href="tree-diagrams.html#an_example_with_rats"><i class="fa fa-check"></i><b>3.7</b> An Example with Rats</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="tree-diagrams.html"><a href="tree-diagrams.html#practice-2"><i class="fa fa-check"></i><b>3.7.1</b> Practice</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="tree-diagrams.html"><a href="tree-diagrams.html#chapter_scenario_revisited_kitty_litter"><i class="fa fa-check"></i><b>3.8</b> Chapter Scenario Revisited - Kitty Litter</a></li>
+<li class="chapter" data-level="3.9" data-path="tree-diagrams.html"><a href="tree-diagrams.html#the_urn_model"><i class="fa fa-check"></i><b>3.9</b> The Urn Model</a><ul>
+<li class="chapter" data-level="3.9.1" data-path="tree-diagrams.html"><a href="tree-diagrams.html#practice-3"><i class="fa fa-check"></i><b>3.9.1</b> Practice</a></li>
+<li class="chapter" data-level="3.9.2" data-path="tree-diagrams.html"><a href="tree-diagrams.html#an-urn-model-with-replacement"><i class="fa fa-check"></i><b>3.9.2</b> An Urn Model with Replacement</a></li>
+</ul></li>
+<li class="chapter" data-level="3.10" data-path="probability-basics.html"><a href="probability-basics.html#exercises"><i class="fa fa-check"></i><b>3.10</b> Exercises</a><ul>
+<li class="chapter" data-level="3.10.1" data-path="tree-diagrams.html"><a href="tree-diagrams.html#exercise---three-coins-in-the-fountain"><i class="fa fa-check"></i><b>3.10.1</b> Exercise - Three Coins in the Fountain</a></li>
+<li class="chapter" data-level="3.10.2" data-path="tree-diagrams.html"><a href="tree-diagrams.html#exercise---more-coins"><i class="fa fa-check"></i><b>3.10.2</b> Exercise - More Coins</a></li>
+<li class="chapter" data-level="3.10.3" data-path="tree-diagrams.html"><a href="tree-diagrams.html#exercise---class-committee"><i class="fa fa-check"></i><b>3.10.3</b> Exercise - Class Committee</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="interlude-four-problems.html"><a href="interlude-four-problems.html"><i class="fa fa-check"></i><b>4</b> Interlude - In an Attempt to Kill the Student, the Authors Solve the Same Simple Problem Four Ways (One Bad and Three Good)</a><ul>
+<li class="chapter" data-level="4.1" data-path="interlude-four-problems.html"><a href="interlude-four-problems.html#risk_problem"><i class="fa fa-check"></i><b>4.1</b> A Problem from the Game of Risk</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="working-with-or-statements.html"><a href="working-with-or-statements.html"><i class="fa fa-check"></i><b>5</b> Working with OR Statements</a><ul>
+<li class="chapter" data-level="5.1" data-path="probability-basics.html"><a href="probability-basics.html#introduction"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2" data-path="working-with-or-statements.html"><a href="working-with-or-statements.html#chapter_scenario_paying_taxes"><i class="fa fa-check"></i><b>5.2</b> Chapter Scenario - Paying Taxes</a></li>
+<li class="chapter" data-level="5.3" data-path="working-with-or-statements.html"><a href="working-with-or-statements.html#class-composition-example"><i class="fa fa-check"></i><b>5.3</b> Class Composition Example</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="working-with-or-statements.html"><a href="working-with-or-statements.html#practice-4"><i class="fa fa-check"></i><b>5.3.1</b> Practice</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="working-with-or-statements.html"><a href="working-with-or-statements.html#venn-diagrams-for-three-events"><i class="fa fa-check"></i><b>5.4</b> Venn Diagrams for Three Events</a></li>
+<li class="chapter" data-level="5.5" data-path="working-with-or-statements.html"><a href="working-with-or-statements.html#example---watching-sports"><i class="fa fa-check"></i><b>5.5</b> Example - Watching Sports</a></li>
+<li class="chapter" data-level="5.6" data-path="working-with-or-statements.html"><a href="working-with-or-statements.html#revisit_chapter_scenario"><i class="fa fa-check"></i><b>5.6</b> Revisiting the Chapter Scenario - Paying Taxes</a></li>
+<li class="chapter" data-level="5.7" data-path="probability-basics.html"><a href="probability-basics.html#exercises"><i class="fa fa-check"></i><b>5.7</b> Exercises</a><ul>
+<li class="chapter" data-level="5.7.1" data-path="working-with-or-statements.html"><a href="working-with-or-statements.html#exercise---venn-for-four"><i class="fa fa-check"></i><b>5.7.1</b> Exercise - Venn for Four</a></li>
+<li class="chapter" data-level="5.7.2" data-path="working-with-or-statements.html"><a href="working-with-or-statements.html#exercise---class-schedules"><i class="fa fa-check"></i><b>5.7.2</b> Exercise - Class Schedules</a></li>
+<li class="chapter" data-level="5.7.3" data-path="working-with-or-statements.html"><a href="working-with-or-statements.html#exercise---class-survey"><i class="fa fa-check"></i><b>5.7.3</b> Exercise - Class Survey</a></li>
+<li class="chapter" data-level="5.7.4" data-path="working-with-or-statements.html"><a href="working-with-or-statements.html#exercise---minding-the-gap"><i class="fa fa-check"></i><b>5.7.4</b> Exercise - Minding the Gap</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="working-with-and-and-not-statements.html"><a href="working-with-and-and-not-statements.html"><i class="fa fa-check"></i><b>6</b> Working with AND and NOT Statements</a><ul>
+<li class="chapter" data-level="6.1" data-path="probability-basics.html"><a href="probability-basics.html#introduction"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="working-with-and-and-not-statements.html"><a href="working-with-and-and-not-statements.html#chapter_scenario_birthday_problem"><i class="fa fa-check"></i><b>6.2</b> Chapter Scenario - The Birthday Problem</a></li>
+<li class="chapter" data-level="6.3" data-path="working-with-and-and-not-statements.html"><a href="working-with-and-and-not-statements.html#the-chevalier-de-mere"><i class="fa fa-check"></i><b>6.3</b> The Chevalier de Mere</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="working-with-and-and-not-statements.html"><a href="working-with-and-and-not-statements.html#practice-5"><i class="fa fa-check"></i><b>6.3.1</b> Practice</a></li>
+<li class="chapter" data-level="6.3.2" data-path="working-with-and-and-not-statements.html"><a href="working-with-and-and-not-statements.html#theorem-the-multiplication-rule"><i class="fa fa-check"></i><b>6.3.2</b> Theorem: The Multiplication Rule</a></li>
+<li class="chapter" data-level="6.3.3" data-path="working-with-and-and-not-statements.html"><a href="working-with-and-and-not-statements.html#theorem-special-case-of-the-multiplication-rule"><i class="fa fa-check"></i><b>6.3.3</b> Theorem: Special Case of the Multiplication Rule</a></li>
+<li class="chapter" data-level="6.3.4" data-path="working-with-and-and-not-statements.html"><a href="working-with-and-and-not-statements.html#theorem-complement-rule"><i class="fa fa-check"></i><b>6.3.4</b> Theorem: Complement Rule</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="working-with-and-and-not-statements.html"><a href="working-with-and-and-not-statements.html#analysing-game-one"><i class="fa fa-check"></i><b>6.4</b> Analysing Game One</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="working-with-and-and-not-statements.html"><a href="working-with-and-and-not-statements.html#practice-6"><i class="fa fa-check"></i><b>6.4.1</b> Practice</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="working-with-and-and-not-statements.html"><a href="working-with-and-and-not-statements.html#analyzing_game_two"><i class="fa fa-check"></i><b>6.5</b> Analyzing Game Two</a><ul>
+<li class="chapter" data-level="6.5.1" data-path="working-with-and-and-not-statements.html"><a href="working-with-and-and-not-statements.html#practice-7"><i class="fa fa-check"></i><b>6.5.1</b> Practice</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="working-with-and-and-not-statements.html"><a href="working-with-and-and-not-statements.html#revisiting-the-chapter-scenario---the-birthday-problem"><i class="fa fa-check"></i><b>6.6</b> Revisiting the Chapter Scenario - The Birthday Problem</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="working-with-and-and-not-statements.html"><a href="working-with-and-and-not-statements.html#practice-8"><i class="fa fa-check"></i><b>6.6.1</b> Practice</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="probability-basics.html"><a href="probability-basics.html#exercises"><i class="fa fa-check"></i><b>6.7</b> Exercises</a><ul>
+<li class="chapter" data-level="6.7.1" data-path="working-with-and-and-not-statements.html"><a href="working-with-and-and-not-statements.html#exercise---birthday-problem-continued"><i class="fa fa-check"></i><b>6.7.1</b> Exercise - Birthday Problem continued</a></li>
+<li class="chapter" data-level="6.7.2" data-path="working-with-and-and-not-statements.html"><a href="working-with-and-and-not-statements.html#exercise---slips-of-paper"><i class="fa fa-check"></i><b>6.7.2</b> Exercise - Slips of Paper</a></li>
+<li class="chapter" data-level="6.7.3" data-path="working-with-and-and-not-statements.html"><a href="working-with-and-and-not-statements.html#exercise---five-coins"><i class="fa fa-check"></i><b>6.7.3</b> Exercise - Five Coins</a></li>
+<li class="chapter" data-level="6.7.4" data-path="working-with-and-and-not-statements.html"><a href="working-with-and-and-not-statements.html#exercise---random-phone-number"><i class="fa fa-check"></i><b>6.7.4</b> Exercise - Random Phone Number</a></li>
+<li class="chapter" data-level="6.7.5" data-path="working-with-and-and-not-statements.html"><a href="working-with-and-and-not-statements.html#exercise---knights-of-the-round-table"><i class="fa fa-check"></i><b>6.7.5</b> Exercise - Knights of the Round Table</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="conditional-probability-and-bayes-theorem.html"><a href="conditional-probability-and-bayes-theorem.html"><i class="fa fa-check"></i><b>7</b> Conditional Probability and Bayes’ Theorem</a><ul>
+<li class="chapter" data-level="7.1" data-path="probability-basics.html"><a href="probability-basics.html#introduction"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
+<li class="chapter" data-level="7.2" data-path="conditional-probability-and-bayes-theorem.html"><a href="conditional-probability-and-bayes-theorem.html#chapter_scenario_drug_testing"><i class="fa fa-check"></i><b>7.2</b> Chapter Scenario - Drug Testing</a></li>
+<li class="chapter" data-level="7.3" data-path="conditional-probability-and-bayes-theorem.html"><a href="conditional-probability-and-bayes-theorem.html#condition_probability_basics"><i class="fa fa-check"></i><b>7.3</b> Conditional Probability Basics</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="conditional-probability-and-bayes-theorem.html"><a href="conditional-probability-and-bayes-theorem.html#practice-9"><i class="fa fa-check"></i><b>7.3.1</b> Practice</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="conditional-probability-and-bayes-theorem.html"><a href="conditional-probability-and-bayes-theorem.html#example_kittens"><i class="fa fa-check"></i><b>7.4</b> Example - Kittens</a></li>
+<li class="chapter" data-level="7.5" data-path="conditional-probability-and-bayes-theorem.html"><a href="conditional-probability-and-bayes-theorem.html#conditional_probability_and_urn_models"><i class="fa fa-check"></i><b>7.5</b> Conditional Probability and Urn Models</a><ul>
+<li class="chapter" data-level="7.5.1" data-path="conditional-probability-and-bayes-theorem.html"><a href="conditional-probability-and-bayes-theorem.html#practice-10"><i class="fa fa-check"></i><b>7.5.1</b> Practice</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="conditional-probability-and-bayes-theorem.html"><a href="conditional-probability-and-bayes-theorem.html#bayes_Rule"><i class="fa fa-check"></i><b>7.6</b> Bayes’ Rule</a></li>
+<li class="chapter" data-level="7.7" data-path="conditional-probability-and-bayes-theorem.html"><a href="conditional-probability-and-bayes-theorem.html#example_defective_fidget_spinners"><i class="fa fa-check"></i><b>7.7</b> Example - Defective Fidget Spinners</a></li>
+<li class="chapter" data-level="7.8" data-path="conditional-probability-and-bayes-theorem.html"><a href="conditional-probability-and-bayes-theorem.html#chapter_scenario_revisited_drug_testing"><i class="fa fa-check"></i><b>7.8</b> Chapter Scenario Revisited - Drug Testing</a></li>
+<li class="chapter" data-level="7.9" data-path="conditional-probability-and-bayes-theorem.html"><a href="conditional-probability-and-bayes-theorem.html#hypothetical_10000_table"><i class="fa fa-check"></i><b>7.9</b> Hypothetical 10,000 Table</a></li>
+<li class="chapter" data-level="7.10" data-path="probability-basics.html"><a href="probability-basics.html#exercises"><i class="fa fa-check"></i><b>7.10</b> Exercises</a><ul>
+<li class="chapter" data-level="7.10.1" data-path="conditional-probability-and-bayes-theorem.html"><a href="conditional-probability-and-bayes-theorem.html#exercise---three-kids"><i class="fa fa-check"></i><b>7.10.1</b> Exercise - Three Kids</a></li>
+<li class="chapter" data-level="7.10.2" data-path="conditional-probability-and-bayes-theorem.html"><a href="conditional-probability-and-bayes-theorem.html#exercise---condemned-man"><i class="fa fa-check"></i><b>7.10.2</b> Exercise - Condemned Man</a></li>
+<li class="chapter" data-level="7.10.3" data-path="conditional-probability-and-bayes-theorem.html"><a href="conditional-probability-and-bayes-theorem.html#exercise---liberal-and-conservative-urns"><i class="fa fa-check"></i><b>7.10.3</b> Exercise - Liberal and Conservative Urns</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="expectation.html"><a href="expectation.html"><i class="fa fa-check"></i><b>8</b> Mathematical Expectation</a><ul>
+<li class="chapter" data-level="8.1" data-path="probability-basics.html"><a href="probability-basics.html#introduction"><i class="fa fa-check"></i><b>8.1</b> Introduction</a></li>
+<li class="chapter" data-level="8.2" data-path="expectation.html"><a href="expectation.html#chapter_scenario_deal_or_no_deal"><i class="fa fa-check"></i><b>8.2</b> Chapter Scenario - Deal or No Deal</a></li>
+<li class="chapter" data-level="8.3" data-path="expectation.html"><a href="expectation.html#introducing-mathematical-expectation"><i class="fa fa-check"></i><b>8.3</b> Introducing Mathematical Expectation</a></li>
+<li class="chapter" data-level="8.4" data-path="expectation.html"><a href="expectation.html#example---win-six"><i class="fa fa-check"></i><b>8.4</b> Example - Win Six</a></li>
+<li class="chapter" data-level="8.5" data-path="expectation.html"><a href="expectation.html#example_chuckaluck"><i class="fa fa-check"></i><b>8.5</b> Example - Chuck-a-Luck</a></li>
+<li class="chapter" data-level="8.6" data-path="expectation.html"><a href="expectation.html#chapter_scenario_revisited_deal_or_no_deal"><i class="fa fa-check"></i><b>8.6</b> Chapter Scenario Revisited - Deal or No Deal</a><ul>
+<li class="chapter" data-level="8.6.1" data-path="expectation.html"><a href="expectation.html#practice-11"><i class="fa fa-check"></i><b>8.6.1</b> Practice</a></li>
+<li class="chapter" data-level="8.6.2" data-path="expectation.html"><a href="expectation.html#simulating-deal-or-no-deal"><i class="fa fa-check"></i><b>8.6.2</b> Simulating Deal or No Deal</a></li>
+<li class="chapter" data-level="8.6.3" data-path="expectation.html"><a href="expectation.html#practice-12"><i class="fa fa-check"></i><b>8.6.3</b> Practice</a></li>
+<li class="chapter" data-level="8.6.4" data-path="expectation.html"><a href="expectation.html#reflection"><i class="fa fa-check"></i><b>8.6.4</b> Reflection</a></li>
+</ul></li>
+<li class="chapter" data-level="8.7" data-path="expectation.html"><a href="expectation.html#deal-or-no-deal-extended"><i class="fa fa-check"></i><b>8.7</b> Deal or No Deal Extended</a></li>
+<li class="chapter" data-level="8.8" data-path="probability-basics.html"><a href="probability-basics.html#exercises"><i class="fa fa-check"></i><b>8.8</b> Exercises</a><ul>
+<li class="chapter" data-level="8.8.1" data-path="expectation.html"><a href="expectation.html#exercise---slot-machine"><i class="fa fa-check"></i><b>8.8.1</b> Exercise - Slot Machine</a></li>
+<li class="chapter" data-level="8.8.2" data-path="expectation.html"><a href="expectation.html#exercise---design-your-own-slot-machine"><i class="fa fa-check"></i><b>8.8.2</b> Exercise - Design Your Own Slot Machine</a></li>
+<li class="chapter" data-level="8.8.3" data-path="expectation.html"><a href="expectation.html#exercise---fair-chuck-a-luck"><i class="fa fa-check"></i><b>8.8.3</b> Exercise - Fair Chuck-a-Luck</a></li>
+<li class="chapter" data-level="8.8.4" data-path="expectation.html"><a href="expectation.html#exercise---chuck-a-luck-big-prize"><i class="fa fa-check"></i><b>8.8.4</b> Exercise - Chuck-a-Luck Big Prize</a></li>
+<li class="chapter" data-level="8.8.5" data-path="expectation.html"><a href="expectation.html#exercise---st.-petersburg-paradox"><i class="fa fa-check"></i><b>8.8.5</b> Exercise - St. Petersburg Paradox</a></li>
+<li class="chapter" data-level="8.8.6" data-path="expectation.html"><a href="expectation.html#exercise---squared-dots"><i class="fa fa-check"></i><b>8.8.6</b> Exercise - Squared Dots</a></li>
+<li class="chapter" data-level="8.8.7" data-path="expectation.html"><a href="expectation.html#exercise---raising-the-stakes"><i class="fa fa-check"></i><b>8.8.7</b> Exercise - Raising the Stakes</a></li>
+<li class="chapter" data-level="8.8.8" data-path="expectation.html"><a href="expectation.html#exercise---deal-or-no-deal-revisited"><i class="fa fa-check"></i><b>8.8.8</b> Exercise - Deal or No Deal Revisited</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="measures-of-variation.html"><a href="measures-of-variation.html"><i class="fa fa-check"></i><b>9</b> Measures of Variation</a><ul>
+<li class="chapter" data-level="9.1" data-path="probability-basics.html"><a href="probability-basics.html#introduction"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
+<li class="chapter" data-level="9.2" data-path="measures-of-variation.html"><a href="measures-of-variation.html#chapter_scenario_roulette_fun_bus"><i class="fa fa-check"></i><b>9.2</b> Chapter Scenario - Roulette Fun Bus</a></li>
+<li class="chapter" data-level="9.3" data-path="measures-of-variation.html"><a href="measures-of-variation.html#measuring_variability_with_variance_and_standard_deviation"><i class="fa fa-check"></i><b>9.3</b> Measuring Variability with Variance and Standard Deviation</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="measures-of-variation.html"><a href="measures-of-variation.html#definition-of-variance"><i class="fa fa-check"></i><b>9.3.1</b> Definition of Variance</a></li>
+<li class="chapter" data-level="9.3.2" data-path="measures-of-variation.html"><a href="measures-of-variation.html#definition-of-standard-deviation"><i class="fa fa-check"></i><b>9.3.2</b> Definition of Standard Deviation</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="measures-of-variation.html"><a href="measures-of-variation.html#example---roulette-even-money-bet"><i class="fa fa-check"></i><b>9.4</b> Example - Roulette Even Money Bet</a></li>
+<li class="chapter" data-level="9.5" data-path="measures-of-variation.html"><a href="measures-of-variation.html#example---roulette-single-number-bet"><i class="fa fa-check"></i><b>9.5</b> Example - Roulette Single Number Bet</a></li>
+<li class="chapter" data-level="9.6" data-path="measures-of-variation.html"><a href="measures-of-variation.html#example---deal-or-no-deal"><i class="fa fa-check"></i><b>9.6</b> Example - Deal or No Deal</a></li>
+<li class="chapter" data-level="9.7" data-path="measures-of-variation.html"><a href="measures-of-variation.html#chapter-scenario-revisited---roulette-fun-bus"><i class="fa fa-check"></i><b>9.7</b> Chapter Scenario Revisited - Roulette Fun Bus</a><ul>
+<li class="chapter" data-level="9.7.1" data-path="measures-of-variation.html"><a href="measures-of-variation.html#simulating-the-bus"><i class="fa fa-check"></i><b>9.7.1</b> Simulating the  Bus</a></li>
+<li class="chapter" data-level="9.7.2" data-path="measures-of-variation.html"><a href="measures-of-variation.html#simulating-the-bus-1"><i class="fa fa-check"></i><b>9.7.2</b> Simulating the  Bus</a></li>
+<li class="chapter" data-level="9.7.3" data-path="measures-of-variation.html"><a href="measures-of-variation.html#comparing-the-and-buses"><i class="fa fa-check"></i><b>9.7.3</b> Comparing the  and  Buses</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="permutations.html"><a href="permutations.html"><i class="fa fa-check"></i><b>10</b> Permutations</a><ul>
+<li class="chapter" data-level="10.1" data-path="probability-basics.html"><a href="probability-basics.html#introduction"><i class="fa fa-check"></i><b>10.1</b> Introduction</a></li>
+<li class="chapter" data-level="10.2" data-path="probability-basics.html"><a href="probability-basics.html#chapter_scenario"><i class="fa fa-check"></i><b>10.2</b> Chapter Scenario - GATC</a></li>
+<li class="chapter" data-level="10.3" data-path="permutations.html"><a href="permutations.html#permutations"><i class="fa fa-check"></i><b>10.3</b> Permutations</a></li>
+<li class="chapter" data-level="10.4" data-path="multiple-events.html"><a href="multiple-events.html#fundamental_counting_principle"><i class="fa fa-check"></i><b>10.4</b> Fundamental Counting Principle Principle</a></li>
+<li class="chapter" data-level="10.5" data-path="permutations.html"><a href="permutations.html#permutation-formula"><i class="fa fa-check"></i><b>10.5</b> Permutation Formula</a></li>
+<li class="chapter" data-level="10.6" data-path="permutations.html"><a href="permutations.html#example---the-line-up"><i class="fa fa-check"></i><b>10.6</b> Example - The Line-up</a></li>
+<li class="chapter" data-level="10.7" data-path="permutations.html"><a href="permutations.html#example_the_mississippi_problem"><i class="fa fa-check"></i><b>10.7</b> Example - The MISSISSIPPI Problem</a></li>
+<li class="chapter" data-level="10.8" data-path="probability-basics.html"><a href="probability-basics.html#exercises"><i class="fa fa-check"></i><b>10.8</b> Exercises</a></li>
+<li class="chapter" data-level="10.9" data-path="permutations.html"><a href="permutations.html#exercises---scrabble"><i class="fa fa-check"></i><b>10.9</b> Exercises - Scrabble</a><ul>
+<li class="chapter" data-level="10.9.1" data-path="permutations.html"><a href="permutations.html#exercise---the-name-game"><i class="fa fa-check"></i><b>10.9.1</b> Exercise - The Name Game</a></li>
+<li class="chapter" data-level="10.9.2" data-path="permutations.html"><a href="permutations.html#exercise---license-plates"><i class="fa fa-check"></i><b>10.9.2</b> Exercise - License Plates</a></li>
+<li class="chapter" data-level="10.9.3" data-path="permutations.html"><a href="permutations.html#exercise---facts-about-permutions"><i class="fa fa-check"></i><b>10.9.3</b> Exercise - Facts about Permutions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="combinations.html"><a href="combinations.html"><i class="fa fa-check"></i><b>11</b> Combinations</a><ul>
+<li class="chapter" data-level="11.1" data-path="probability-basics.html"><a href="probability-basics.html#introduction"><i class="fa fa-check"></i><b>11.1</b> Introduction</a></li>
+<li class="chapter" data-level="11.2" data-path="combinations.html"><a href="combinations.html#chapter_scenario_three_counting_problems"><i class="fa fa-check"></i><b>11.2</b> Chapter Scenario - Three Counting Problems and an Algebra Problem</a></li>
+<li class="chapter" data-level="11.3" data-path="combinations.html"><a href="combinations.html#example_class_lineup_to_class_committee"><i class="fa fa-check"></i><b>11.3</b> Example - From Class Line-up to Class Committee</a></li>
+<li class="chapter" data-level="11.4" data-path="combinations.html"><a href="combinations.html#combination-formula"><i class="fa fa-check"></i><b>11.4</b> Combination Formula</a></li>
+<li class="chapter" data-level="11.5" data-path="combinations.html"><a href="combinations.html#chapter-scenario-revisited---three-counting-problems-and-an-algebra-problem"><i class="fa fa-check"></i><b>11.5</b> Chapter Scenario Revisited - Three Counting Problems and an Algebra Problem</a><ul>
+<li class="chapter" data-level="11.5.1" data-path="combinations.html"><a href="combinations.html#problem-1---birth-orderings"><i class="fa fa-check"></i><b>11.5.1</b> Problem 1 - Birth Orderings</a></li>
+<li class="chapter" data-level="11.5.2" data-path="combinations.html"><a href="combinations.html#problem-2---block-walking"><i class="fa fa-check"></i><b>11.5.2</b> Problem 2 - Block-walking</a></li>
+<li class="chapter" data-level="11.5.3" data-path="combinations.html"><a href="combinations.html#problem-3---team-captains"><i class="fa fa-check"></i><b>11.5.3</b> Problem 3 - Team Captains</a></li>
+<li class="chapter" data-level="11.5.4" data-path="combinations.html"><a href="combinations.html#problem-4---binomial-expansion"><i class="fa fa-check"></i><b>11.5.4</b> Problem 4 - Binomial Expansion</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="combinations.html"><a href="combinations.html#exercises-1"><i class="fa fa-check"></i><b>11.6</b> Exercises</a><ul>
+<li class="chapter" data-level="11.6.1" data-path="combinations.html"><a href="combinations.html#exercise---alphabet"><i class="fa fa-check"></i><b>11.6.1</b> Exercise - Alphabet</a></li>
+<li class="chapter" data-level="11.6.2" data-path="combinations.html"><a href="combinations.html#exercise---facts-about-combinations"><i class="fa fa-check"></i><b>11.6.2</b> Exercise - Facts about Combinations</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="case-study-blockwalking.html"><a href="case-study-blockwalking.html"><i class="fa fa-check"></i><b>12</b> Case Study - Block-walking, Tree Diagrams, and the Quincunx</a><ul>
+<li class="chapter" data-level="12.1" data-path="case-study-blockwalking.html"><a href="case-study-blockwalking.html#chapter_scenario_the_quincunx"><i class="fa fa-check"></i><b>12.1</b> Chapter Scenario - The Quincunx</a></li>
+<li class="chapter" data-level="12.2" data-path="case-study-blockwalking.html"><a href="case-study-blockwalking.html#the-block-walking-encyclopedia"><i class="fa fa-check"></i><b>12.2</b> The Block-walking Encyclopedia</a></li>
+<li class="chapter" data-level="12.3" data-path="case-study-blockwalking.html"><a href="case-study-blockwalking.html#chapter_scenario_revisited_the_quincunx"><i class="fa fa-check"></i><b>12.3</b> Chapter Scenario Revisited - The Quincunx</a></li>
+<li class="chapter" data-level="12.4" data-path="case-study-blockwalking.html"><a href="case-study-blockwalking.html#simulation-1"><i class="fa fa-check"></i><b>12.4</b> Simulation</a><ul>
+<li class="chapter" data-level="12.4.1" data-path="case-study-blockwalking.html"><a href="case-study-blockwalking.html#exercise---two-stage-quincunx"><i class="fa fa-check"></i><b>12.4.1</b> Exercise - Two-stage Quincunx</a></li>
+<li class="chapter" data-level="12.4.2" data-path="case-study-blockwalking.html"><a href="case-study-blockwalking.html#exercise---plinko"><i class="fa fa-check"></i><b>12.4.2</b> Exercise - Plinko</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="case-study-problem-of-the-points.html"><a href="case-study-problem-of-the-points.html"><i class="fa fa-check"></i><b>13</b> Case Study - The Problem of the Points</a><ul>
+<li class="chapter" data-level="13.1" data-path="case-study-problem-of-the-points.html"><a href="case-study-problem-of-the-points.html#chapter_scenario_the_bart_series"><i class="fa fa-check"></i><b>13.1</b> Chapter Scenario - The BART Series</a></li>
+<li class="chapter" data-level="13.2" data-path="case-study-problem-of-the-points.html"><a href="case-study-problem-of-the-points.html#a-simpler-case---a-three-two-split"><i class="fa fa-check"></i><b>13.2</b> A Simpler Case - A Three-Two Split</a></li>
+<li class="chapter" data-level="13.3" data-path="case-study-problem-of-the-points.html"><a href="case-study-problem-of-the-points.html#chapter_scenario_revisited_the_bart_series"><i class="fa fa-check"></i><b>13.3</b> Chapter Scenario Revisited - The BART Series</a><ul>
+<li class="chapter" data-level="13.3.1" data-path="case-study-problem-of-the-points.html"><a href="case-study-problem-of-the-points.html#exercise---a-threeone-split"><i class="fa fa-check"></i><b>13.3.1</b> Exercise - A Three:One Split</a></li>
+<li class="chapter" data-level="13.3.2" data-path="case-study-problem-of-the-points.html"><a href="case-study-problem-of-the-points.html#exercise---a-threezero-split"><i class="fa fa-check"></i><b>13.3.2</b> Exercise - A Three:Zero Split</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="the-binomial-distribution.html"><a href="the-binomial-distribution.html"><i class="fa fa-check"></i><b>14</b> The Binomial Distribution</a><ul>
+<li class="chapter" data-level="14.1" data-path="probability-basics.html"><a href="probability-basics.html#introduction"><i class="fa fa-check"></i><b>14.1</b> Introduction</a></li>
+<li class="chapter" data-level="14.2" data-path="the-binomial-distribution.html"><a href="the-binomial-distribution.html#chapter_scenario_pounding_pennies"><i class="fa fa-check"></i><b>14.2</b> Chapter Scenario - Pounding Pennies</a></li>
+<li class="chapter" data-level="14.3" data-path="the-binomial-distribution.html"><a href="the-binomial-distribution.html#the-binomial-distribution-1"><i class="fa fa-check"></i><b>14.3</b> The Binomial Distribution</a></li>
+<li class="chapter" data-level="14.4" data-path="the-binomial-distribution.html"><a href="the-binomial-distribution.html#the-binomial-distribution-in-r"><i class="fa fa-check"></i><b>14.4</b> The Binomial Distribution in R</a></li>
+<li class="chapter" data-level="14.5" data-path="the-binomial-distribution.html"><a href="the-binomial-distribution.html#example---throwing-darts"><i class="fa fa-check"></i><b>14.5</b> Example - Throwing Darts</a><ul>
+<li class="chapter" data-level="14.5.1" data-path="the-binomial-distribution.html"><a href="the-binomial-distribution.html#individual-probabilities"><i class="fa fa-check"></i><b>14.5.1</b> Individual Probabilities</a></li>
+<li class="chapter" data-level="14.5.2" data-path="the-binomial-distribution.html"><a href="the-binomial-distribution.html#cumulative-probabilities"><i class="fa fa-check"></i><b>14.5.2</b> Cumulative Probabilities</a></li>
+<li class="chapter" data-level="14.5.3" data-path="the-binomial-distribution.html"><a href="the-binomial-distribution.html#inverse-probabilities"><i class="fa fa-check"></i><b>14.5.3</b> Inverse Probabilities</a></li>
+</ul></li>
+<li class="chapter" data-level="14.6" data-path="the-binomial-distribution.html"><a href="the-binomial-distribution.html#example_tennis_first_serve_percentage"><i class="fa fa-check"></i><b>14.6</b> Example - Tennis First Serve Percentage</a></li>
+<li class="chapter" data-level="14.7" data-path="the-binomial-distribution.html"><a href="the-binomial-distribution.html#example_set_spike_kill"><i class="fa fa-check"></i><b>14.7</b> Example - Set, Spike, Kill</a></li>
+<li class="chapter" data-level="14.8" data-path="the-binomial-distribution.html"><a href="the-binomial-distribution.html#chaper_scenario_revisited_pounding_pennies"><i class="fa fa-check"></i><b>14.8</b> Chapter Scenario Revisited - Pounding Pennies</a></li>
+<li class="chapter" data-level="14.9" data-path="probability-basics.html"><a href="probability-basics.html#exercises"><i class="fa fa-check"></i><b>14.9</b> Exercises</a><ul>
+<li class="chapter" data-level="14.9.1" data-path="the-binomial-distribution.html"><a href="the-binomial-distribution.html#exercises---birth-orderings"><i class="fa fa-check"></i><b>14.9.1</b> Exercises - Birth Orderings</a></li>
+<li class="chapter" data-level="14.9.2" data-path="the-binomial-distribution.html"><a href="the-binomial-distribution.html#exercise---slot-machine-1"><i class="fa fa-check"></i><b>14.9.2</b> Exercise - Slot Machine</a></li>
+<li class="chapter" data-level="14.9.3" data-path="the-binomial-distribution.html"><a href="the-binomial-distribution.html#exercise---jasmine-recommends"><i class="fa fa-check"></i><b>14.9.3</b> Exercise - Jasmine Recommends</a></li>
+<li class="chapter" data-level="14.9.4" data-path="the-binomial-distribution.html"><a href="the-binomial-distribution.html#exercise---cancer-indicence"><i class="fa fa-check"></i><b>14.9.4</b> Exercise - Cancer Indicence</a></li>
+<li class="chapter" data-level="14.9.5" data-path="the-binomial-distribution.html"><a href="the-binomial-distribution.html#exercise---famous-places"><i class="fa fa-check"></i><b>14.9.5</b> Exercise - Famous Places</a></li>
+<li class="chapter" data-level="14.9.6" data-path="the-binomial-distribution.html"><a href="the-binomial-distribution.html#exercise---stealing-dogs"><i class="fa fa-check"></i><b>14.9.6</b> Exercise - Stealing Dogs</a></li>
+<li class="chapter" data-level="14.9.7" data-path="the-binomial-distribution.html"><a href="the-binomial-distribution.html#exercise---please-read-this-book"><i class="fa fa-check"></i><b>14.9.7</b> Exercise - Please Read this Book!</a></li>
+<li class="chapter" data-level="14.9.8" data-path="the-binomial-distribution.html"><a href="the-binomial-distribution.html#exercise---the-animal-pictionary"><i class="fa fa-check"></i><b>14.9.8</b> Exercise - The Animal Pictionary</a></li>
+<li class="chapter" data-level="14.9.9" data-path="the-binomial-distribution.html"><a href="the-binomial-distribution.html#exercise---not-that-funny"><i class="fa fa-check"></i><b>14.9.9</b> Exercise - Not that Funny!</a></li>
+<li class="chapter" data-level="14.9.10" data-path="the-binomial-distribution.html"><a href="the-binomial-distribution.html#exercise---beat-the-dean"><i class="fa fa-check"></i><b>14.9.10</b> Exercise - Beat the Dean</a></li>
+<li class="chapter" data-level="14.9.11" data-path="the-binomial-distribution.html"><a href="the-binomial-distribution.html#exercise---perro-no-habla-espanol"><i class="fa fa-check"></i><b>14.9.11</b> Exercise - Perro No Habla Espanol</a></li>
+<li class="chapter" data-level="14.9.12" data-path="the-binomial-distribution.html"><a href="the-binomial-distribution.html#exercise---the-kitty-genovese-case"><i class="fa fa-check"></i><b>14.9.12</b> Exercise - The Kitty Genovese Case</a></li>
+<li class="chapter" data-level="14.9.13" data-path="the-binomial-distribution.html"><a href="the-binomial-distribution.html#exercise---sweeping-three"><i class="fa fa-check"></i><b>14.9.13</b> Exercise - Sweeping Three</a></li>
+<li class="chapter" data-level="14.9.14" data-path="the-binomial-distribution.html"><a href="the-binomial-distribution.html#exercise---stop-browsing-pinterest-during-class"><i class="fa fa-check"></i><b>14.9.14</b> Exercise - Stop Browsing Pinterest During Class</a></li>
+<li class="chapter" data-level="14.9.15" data-path="the-binomial-distribution.html"><a href="the-binomial-distribution.html#exercise---to-sweat-or-not-to-sweat"><i class="fa fa-check"></i><b>14.9.15</b> Exercise - To Sweat or Not to Sweat</a></li>
+<li class="chapter" data-level="14.9.16" data-path="the-binomial-distribution.html"><a href="the-binomial-distribution.html#exercise---i-lift-things-up-i-set-things-down"><i class="fa fa-check"></i><b>14.9.16</b> Exercise - I Lift Things Up, I Set Things Down</a></li>
+<li class="chapter" data-level="14.9.17" data-path="the-binomial-distribution.html"><a href="the-binomial-distribution.html#exercise---liking-probability"><i class="fa fa-check"></i><b>14.9.17</b> Exercise - Liking Probability</a></li>
+<li class="chapter" data-level="14.9.18" data-path="the-binomial-distribution.html"><a href="the-binomial-distribution.html#exercise---swimming-in-the-ocean"><i class="fa fa-check"></i><b>14.9.18</b> Exercise - Swimming in the Ocean</a></li>
+<li class="chapter" data-level="14.9.19" data-path="the-binomial-distribution.html"><a href="the-binomial-distribution.html#exercise---biking-the-double-black-diamond"><i class="fa fa-check"></i><b>14.9.19</b> Exercise - Biking the Double Black Diamond</a></li>
+<li class="chapter" data-level="14.9.20" data-path="the-binomial-distribution.html"><a href="the-binomial-distribution.html#exercise---sloth-lore"><i class="fa fa-check"></i><b>14.9.20</b> Exercise - Sloth-lore</a></li>
+<li class="chapter" data-level="14.9.21" data-path="the-binomial-distribution.html"><a href="the-binomial-distribution.html#exercise---diy-binomial"><i class="fa fa-check"></i><b>14.9.21</b> Exercise - DIY Binomial</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="normal.html"><a href="normal.html"><i class="fa fa-check"></i><b>15</b> Normal Distribution</a><ul>
+<li class="chapter" data-level="15.1" data-path="probability-basics.html"><a href="probability-basics.html#introduction"><i class="fa fa-check"></i><b>15.1</b> Introduction</a></li>
+<li class="chapter" data-level="15.2" data-path="normal.html"><a href="normal.html#chapter_scenario_wanna_be_a_fighter_pilot"><i class="fa fa-check"></i><b>15.2</b> Chapter Scenario - Wanna be a Fighter Pilot</a></li>
+<li class="chapter" data-level="15.3" data-path="normal.html"><a href="normal.html#the-normal-probability-distribution"><i class="fa fa-check"></i><b>15.3</b> The Normal Probability Distribution</a></li>
+<li class="chapter" data-level="15.4" data-path="normal.html"><a href="normal.html#the-normal-distribution-in-r"><i class="fa fa-check"></i><b>15.4</b> The Normal Distribution in R</a></li>
+<li class="chapter" data-level="15.5" data-path="normal.html"><a href="normal.html#example---normal-blood-pressure"><i class="fa fa-check"></i><b>15.5</b> Example - Normal Blood Pressure</a><ul>
+<li class="chapter" data-level="15.5.1" data-path="normal.html"><a href="normal.html#finding-sbp-probabilities-with-pdist"><i class="fa fa-check"></i><b>15.5.1</b> Finding SBP Probabilities with <code>pdist</code></a></li>
+<li class="chapter" data-level="15.5.2" data-path="normal.html"><a href="normal.html#finding-sbp-percentiles-with-qdist"><i class="fa fa-check"></i><b>15.5.2</b> Finding SBP Percentiles with <code>qdist</code></a></li>
+</ul></li>
+<li class="chapter" data-level="15.6" data-path="normal.html"><a href="normal.html#the-standard-normal-z-sim-n01"><i class="fa fa-check"></i><b>15.6</b> The Standard Normal <span class="math inline">\(Z \sim N(0,1)\)</span></a></li>
+<li class="chapter" data-level="15.7" data-path="normal.html"><a href="normal.html#example---tides"><i class="fa fa-check"></i><b>15.7</b> Example - Tides</a></li>
+<li class="chapter" data-level="15.8" data-path="normal.html"><a href="normal.html#the-68-95-99.7-rule"><i class="fa fa-check"></i><b>15.8</b> The 68-95-99.7 Rule</a></li>
+<li class="chapter" data-level="15.9" data-path="probability-basics.html"><a href="probability-basics.html#exercises"><i class="fa fa-check"></i><b>15.9</b> Exercises</a><ul>
+<li class="chapter" data-level="15.9.1" data-path="normal.html"><a href="normal.html#exercise---exercise-exercise"><i class="fa fa-check"></i><b>15.9.1</b> Exercise - Exercise, Exercise</a></li>
+<li class="chapter" data-level="15.9.2" data-path="normal.html"><a href="normal.html#exercise---hello-doggie"><i class="fa fa-check"></i><b>15.9.2</b> Exercise - Hello, Doggie!</a></li>
+<li class="chapter" data-level="15.9.3" data-path="normal.html"><a href="normal.html#exercise---is-ice-nice"><i class="fa fa-check"></i><b>15.9.3</b> Exercise - Is ICE Nice?</a></li>
+<li class="chapter" data-level="15.9.4" data-path="normal.html"><a href="normal.html#exercise---friday-is-skiday"><i class="fa fa-check"></i><b>15.9.4</b> Exercise - Friday is Skiday</a></li>
+<li class="chapter" data-level="15.9.5" data-path="normal.html"><a href="normal.html#exercise---ballroom-burn"><i class="fa fa-check"></i><b>15.9.5</b> Exercise - Ballroom Burn</a></li>
+<li class="chapter" data-level="15.9.6" data-path="normal.html"><a href="normal.html#exercise---dont-search-pinterest-during-probability-class"><i class="fa fa-check"></i><b>15.9.6</b> Exercise - Don’t Search Pinterest During Probability Class</a></li>
+<li class="chapter" data-level="15.9.7" data-path="normal.html"><a href="normal.html#exercise---normal-blood-pressure"><i class="fa fa-check"></i><b>15.9.7</b> Exercise - Normal Blood Pressure</a></li>
+<li class="chapter" data-level="15.9.8" data-path="normal.html"><a href="normal.html#exercise---ping-pong-with-the-dean"><i class="fa fa-check"></i><b>15.9.8</b> Exercise - Ping Pong with the Dean</a></li>
+<li class="chapter" data-level="15.9.9" data-path="normal.html"><a href="normal.html#exercise---should-i-take-this-to-antique-road-show"><i class="fa fa-check"></i><b>15.9.9</b> Exercise - Should I Take This to Antique Road Show?</a></li>
+<li class="chapter" data-level="15.9.10" data-path="normal.html"><a href="normal.html#exercise---should-be-have-universal-health-care"><i class="fa fa-check"></i><b>15.9.10</b> Exercise - Should be Have Universal Health Care?</a></li>
+<li class="chapter" data-level="15.9.11" data-path="normal.html"><a href="normal.html#exercise---movie-run-times"><i class="fa fa-check"></i><b>15.9.11</b> Exercise - Movie Run Times</a></li>
+<li class="chapter" data-level="15.9.12" data-path="normal.html"><a href="normal.html#exercise---the-sloth-olympics"><i class="fa fa-check"></i><b>15.9.12</b> Exercise - The Sloth Olympics</a></li>
+<li class="chapter" data-level="15.9.13" data-path="normal.html"><a href="normal.html#exercise-group-project---analyzing-grading-systems"><i class="fa fa-check"></i><b>15.9.13</b> Exercise (Group Project) - Analyzing Grading Systems</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="sums-of-random-variables.html"><a href="sums-of-random-variables.html"><i class="fa fa-check"></i><b>16</b> Sums of Random Variables</a><ul>
+<li class="chapter" data-level="16.1" data-path="probability-basics.html"><a href="probability-basics.html#introduction"><i class="fa fa-check"></i><b>16.1</b> Introduction</a></li>
+<li class="chapter" data-level="16.2" data-path="sums-of-random-variables.html"><a href="sums-of-random-variables.html#chapter_scenario_comparing_heights"><i class="fa fa-check"></i><b>16.2</b> Chapter Scenario - Comparing Heights</a></li>
+<li class="chapter" data-level="16.3" data-path="sums-of-random-variables.html"><a href="sums-of-random-variables.html#example---wheels-of-fortune"><i class="fa fa-check"></i><b>16.3</b> Example - Wheels of Fortune</a><ul>
+<li class="chapter" data-level="16.3.1" data-path="sums-of-random-variables.html"><a href="sums-of-random-variables.html#practice---preconceptions"><i class="fa fa-check"></i><b>16.3.1</b> Practice - Preconceptions</a></li>
+<li class="chapter" data-level="16.3.2" data-path="sums-of-random-variables.html"><a href="sums-of-random-variables.html#simulating-the-games"><i class="fa fa-check"></i><b>16.3.2</b> Simulating the Games</a></li>
+</ul></li>
+<li class="chapter" data-level="16.4" data-path="sums-of-random-variables.html"><a href="sums-of-random-variables.html#expectation-for-the-sum-of-two-random-variables"><i class="fa fa-check"></i><b>16.4</b> Expectation for the Sum of Two Random Variables</a></li>
+<li class="chapter" data-level="16.5" data-path="sums-of-random-variables.html"><a href="sums-of-random-variables.html#variance-and-standard-deviation-for-the-sum-of-two-random-variables"><i class="fa fa-check"></i><b>16.5</b> Variance and Standard Deviation for the Sum of Two Random Variables</a></li>
+<li class="chapter" data-level="16.6" data-path="sums-of-random-variables.html"><a href="sums-of-random-variables.html#summing-independent-identically-distributed-random-variables"><i class="fa fa-check"></i><b>16.6</b> Summing Independent Identically Distributed Random Variables</a></li>
+<li class="chapter" data-level="16.7" data-path="sums-of-random-variables.html"><a href="sums-of-random-variables.html#the_roots_of_the_normal"><i class="fa fa-check"></i><b>16.7</b> The Roots of the Normal</a><ul>
+<li class="chapter" data-level="16.7.1" data-path="sums-of-random-variables.html"><a href="sums-of-random-variables.html#simulating-the-toss-of-two-dice"><i class="fa fa-check"></i><b>16.7.1</b> Simulating the Toss of Two Dice</a></li>
+</ul></li>
+<li class="chapter" data-level="16.8" data-path="sums-of-random-variables.html"><a href="sums-of-random-variables.html#the-central-limit-theorem"><i class="fa fa-check"></i><b>16.8</b> The Central Limit Theorem</a><ul>
+<li class="chapter" data-level="16.8.1" data-path="sums-of-random-variables.html"><a href="sums-of-random-variables.html#the-central-limit-for-sums"><i class="fa fa-check"></i><b>16.8.1</b> The Central Limit for Sums</a></li>
+<li class="chapter" data-level="16.8.2" data-path="sums-of-random-variables.html"><a href="sums-of-random-variables.html#the-central-limit-for-sample-means"><i class="fa fa-check"></i><b>16.8.2</b> The Central Limit for Sample Means</a></li>
+</ul></li>
+<li class="chapter" data-level="16.9" data-path="sums-of-random-variables.html"><a href="sums-of-random-variables.html#conclusion"><i class="fa fa-check"></i><b>16.9</b> Conclusion</a></li>
+<li class="chapter" data-level="16.10" data-path="sums-of-random-variables.html"><a href="sums-of-random-variables.html#adding-normals"><i class="fa fa-check"></i><b>16.10</b> Adding Normals</a></li>
+<li class="chapter" data-level="16.11" data-path="sums-of-random-variables.html"><a href="sums-of-random-variables.html#example_tips_on_the_weekend"><i class="fa fa-check"></i><b>16.11</b> Example - Tips on the Weekend</a></li>
+<li class="chapter" data-level="16.12" data-path="sums-of-random-variables.html"><a href="sums-of-random-variables.html#chapter_scenario_revisited_comparing_heights"><i class="fa fa-check"></i><b>16.12</b> Chapter Scenario Revisited - Comparing Heights</a></li>
+<li class="chapter" data-level="16.13" data-path="probability-basics.html"><a href="probability-basics.html#exercises"><i class="fa fa-check"></i><b>16.13</b> Exercises</a><ul>
+<li class="chapter" data-level="16.13.1" data-path="sums-of-random-variables.html"><a href="sums-of-random-variables.html#exercise-group-project---zombie-apocalypse"><i class="fa fa-check"></i><b>16.13.1</b> Exercise (Group Project) - Zombie Apocalypse</a></li>
+<li class="chapter" data-level="16.13.2" data-path="sums-of-random-variables.html"><a href="sums-of-random-variables.html#exercise---dungeons-and-dragons-dice"><i class="fa fa-check"></i><b>16.13.2</b> Exercise - Dungeons and Dragons Dice</a></li>
+<li class="chapter" data-level="16.13.3" data-path="sums-of-random-variables.html"><a href="sums-of-random-variables.html#exercise---difference-of-wheels"><i class="fa fa-check"></i><b>16.13.3</b> Exercise - Difference of Wheels</a></li>
+<li class="chapter" data-level="16.13.4" data-path="sums-of-random-variables.html"><a href="sums-of-random-variables.html#exercise---comparing-blood-pressure"><i class="fa fa-check"></i><b>16.13.4</b> Exercise - Comparing Blood Pressure</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="geometric-distribution.html"><a href="geometric-distribution.html"><i class="fa fa-check"></i><b>17</b> The Geometric Distribution</a><ul>
+<li class="chapter" data-level="17.1" data-path="probability-basics.html"><a href="probability-basics.html#introduction"><i class="fa fa-check"></i><b>17.1</b> Introduction</a></li>
+<li class="chapter" data-level="17.2" data-path="geometric-distribution.html"><a href="geometric-distribution.html#chapter_scenario_lovin_the_airport"><i class="fa fa-check"></i><b>17.2</b> Chapter Scenario - Lovin’ the Airport</a></li>
+<li class="chapter" data-level="17.3" data-path="geometric-distribution.html"><a href="geometric-distribution.html#example---waiting-for-lucky-number-7"><i class="fa fa-check"></i><b>17.3</b> Example - Waiting for Lucky Number 7</a><ul>
+<li class="chapter" data-level="17.3.1" data-path="geometric-distribution.html"><a href="geometric-distribution.html#the-geometric-distribution"><i class="fa fa-check"></i><b>17.3.1</b> The Geometric Distribution</a></li>
+<li class="chapter" data-level="17.3.2" data-path="geometric-distribution.html"><a href="geometric-distribution.html#the-geometric-random-variable-in-r"><i class="fa fa-check"></i><b>17.3.2</b> The Geometric Random Variable in R</a></li>
+</ul></li>
+<li class="chapter" data-level="17.4" data-path="probability-basics.html"><a href="probability-basics.html#exercises"><i class="fa fa-check"></i><b>17.4</b> Exercises</a><ul>
+<li class="chapter" data-level="17.4.1" data-path="geometric-distribution.html"><a href="geometric-distribution.html#exercise---the-geometric-dice-game"><i class="fa fa-check"></i><b>17.4.1</b> Exercise - The Geometric Dice Game</a></li>
+<li class="chapter" data-level="17.4.2" data-path="geometric-distribution.html"><a href="geometric-distribution.html#exercise---nba-halfcourt-shot"><i class="fa fa-check"></i><b>17.4.2</b> Exercise - NBA Halfcourt Shot</a></li>
+<li class="chapter" data-level="17.4.3" data-path="geometric-distribution.html"><a href="geometric-distribution.html#exercise---the-chevalier-de-mere-revisited"><i class="fa fa-check"></i><b>17.4.3</b> Exercise - The Chevalier de Mere Revisited</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="hypergeometric-distribution.html"><a href="hypergeometric-distribution.html"><i class="fa fa-check"></i><b>18</b> The Hypergeometric Distribution</a><ul>
+<li class="chapter" data-level="18.1" data-path="probability-basics.html"><a href="probability-basics.html#introduction"><i class="fa fa-check"></i><b>18.1</b> Introduction</a></li>
+<li class="chapter" data-level="18.2" data-path="hypergeometric-distribution.html"><a href="hypergeometric-distribution.html#hypergeometric_random_variable"><i class="fa fa-check"></i><b>18.2</b> The Hypergeometric Random Variable</a><ul>
+<li class="chapter" data-level="18.2.1" data-path="hypergeometric-distribution.html"><a href="hypergeometric-distribution.html#example---a-class-controversy"><i class="fa fa-check"></i><b>18.2.1</b> Example - A Class Controversy</a></li>
+<li class="chapter" data-level="18.2.2" data-path="hypergeometric-distribution.html"><a href="hypergeometric-distribution.html#the-hypergeometric-distribution"><i class="fa fa-check"></i><b>18.2.2</b> The Hypergeometric Distribution</a></li>
+<li class="chapter" data-level="18.2.3" data-path="hypergeometric-distribution.html"><a href="hypergeometric-distribution.html#the-hypergeometric-random-variable-in-r"><i class="fa fa-check"></i><b>18.2.3</b> The Hypergeometric Random Variable in R</a></li>
+</ul></li>
+<li class="chapter" data-level="18.3" data-path="probability-basics.html"><a href="probability-basics.html#exercises"><i class="fa fa-check"></i><b>18.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="poisson-distribution.html"><a href="poisson-distribution.html"><i class="fa fa-check"></i><b>19</b> The Poisson Distribution</a><ul>
+<li class="chapter" data-level="19.1" data-path="probability-basics.html"><a href="probability-basics.html#introduction"><i class="fa fa-check"></i><b>19.1</b> Introduction</a></li>
+<li class="chapter" data-level="19.2" data-path="poisson-distribution.html"><a href="poisson-distribution.html#the_poisson_random_variable"><i class="fa fa-check"></i><b>19.2</b> The Poisson Random Variable</a><ul>
+<li class="chapter" data-level="19.2.1" data-path="poisson-distribution.html"><a href="poisson-distribution.html#the-poisson-distribution"><i class="fa fa-check"></i><b>19.2.1</b> The Poisson Distribution</a></li>
+<li class="chapter" data-level="19.2.2" data-path="poisson-distribution.html"><a href="poisson-distribution.html#the-poisson-random-variable-in-r"><i class="fa fa-check"></i><b>19.2.2</b> The Poisson Random Variable in R</a></li>
+<li class="chapter" data-level="19.2.3" data-path="poisson-distribution.html"><a href="poisson-distribution.html#modeling-number-of-earthquakes-with-the-poisson"><i class="fa fa-check"></i><b>19.2.3</b> Modeling Number of Earthquakes with the Poisson</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="probability-basics.html"><a href="probability-basics.html#exercises"><i class="fa fa-check"></i><b>19.3</b> Exercises</a><ul>
+<li class="chapter" data-level="19.3.1" data-path="poisson-distribution.html"><a href="poisson-distribution.html#exercise---counting-earthquakes"><i class="fa fa-check"></i><b>19.3.1</b> Exercise - Counting Earthquakes</a></li>
+<li class="chapter" data-level="19.3.2" data-path="poisson-distribution.html"><a href="poisson-distribution.html#exercise---growth-mindset-and-math-errors"><i class="fa fa-check"></i><b>19.3.2</b> Exercise - Growth Mindset and Math Errors</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="multinomial-distribution.html"><a href="multinomial-distribution.html"><i class="fa fa-check"></i><b>20</b> Multinomial Distribution</a><ul>
+<li class="chapter" data-level="20.1" data-path="multinomial-distribution.html"><a href="multinomial-distribution.html#chapter_scenario_3D_ant_walking"><i class="fa fa-check"></i><b>20.1</b> Chapter Scenario - 3D Ant Walking</a></li>
+<li class="chapter" data-level="20.2" data-path="multinomial-distribution.html"><a href="multinomial-distribution.html#chapter_scenario_revisited_3D_ant_walking"><i class="fa fa-check"></i><b>20.2</b> Chapter Scenario Revisited - 3D Ant Walking</a><ul>
+<li class="chapter" data-level="20.2.1" data-path="multinomial-distribution.html"><a href="multinomial-distribution.html#a-simpler-example"><i class="fa fa-check"></i><b>20.2.1</b> A Simpler Example</a></li>
+<li class="chapter" data-level="20.2.2" data-path="multinomial-distribution.html"><a href="multinomial-distribution.html#the-original-problem"><i class="fa fa-check"></i><b>20.2.2</b> The Original Problem</a></li>
+<li class="chapter" data-level="20.2.3" data-path="multinomial-distribution.html"><a href="multinomial-distribution.html#general-3d-lattice-situation"><i class="fa fa-check"></i><b>20.2.3</b> General 3D Lattice Situation</a></li>
+</ul></li>
+<li class="chapter" data-level="20.3" data-path="multinomial-distribution.html"><a href="multinomial-distribution.html#example---hair-color"><i class="fa fa-check"></i><b>20.3</b> Example - Hair Color</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="uniform-distribution.html"><a href="uniform-distribution.html"><i class="fa fa-check"></i><b>21</b> The Uniform Distribution</a><ul>
+<li class="chapter" data-level="21.1" data-path="probability-basics.html"><a href="probability-basics.html#introduction"><i class="fa fa-check"></i><b>21.1</b> Introduction</a></li>
+<li class="chapter" data-level="21.2" data-path="geometric-distribution.html"><a href="geometric-distribution.html#chapter_scenario_lovin_the_airport"><i class="fa fa-check"></i><b>21.2</b> Chapter Scenario - Lovin’ the Airport</a></li>
+<li class="chapter" data-level="21.3" data-path="uniform-distribution.html"><a href="uniform-distribution.html#the_uniform_distribution"><i class="fa fa-check"></i><b>21.3</b> The Uniform Distribution</a><ul>
+<li class="chapter" data-level="21.3.1" data-path="uniform-distribution.html"><a href="uniform-distribution.html#the_uniform_probability_density_function"><i class="fa fa-check"></i><b>21.3.1</b> The Uniform Probability Density Function</a></li>
+<li class="chapter" data-level="21.3.2" data-path="uniform-distribution.html"><a href="uniform-distribution.html#the-uniform-random-variable-in-r"><i class="fa fa-check"></i><b>21.3.2</b> The Uniform Random Variable in R</a></li>
+<li class="chapter" data-level="21.3.3" data-path="uniform-distribution.html"><a href="uniform-distribution.html#example---the-unif01-random-variable"><i class="fa fa-check"></i><b>21.3.3</b> Example - The UNIF(0,1) Random Variable</a></li>
+<li class="chapter" data-level="21.3.4" data-path="uniform-distribution.html"><a href="uniform-distribution.html#example---catch-a-flight"><i class="fa fa-check"></i><b>21.3.4</b> Example - Catch a Flight</a></li>
+</ul></li>
+<li class="chapter" data-level="21.4" data-path="uniform-distribution.html"><a href="uniform-distribution.html#chapter_scenario_revisited_lovin_the_airport"><i class="fa fa-check"></i><b>21.4</b> Chapter Scenario Revisited - Lovin’ the Airport</a></li>
+<li class="chapter" data-level="21.5" data-path="probability-basics.html"><a href="probability-basics.html#exercises"><i class="fa fa-check"></i><b>21.5</b> Exercises</a><ul>
+<li class="chapter" data-level="21.5.1" data-path="uniform-distribution.html"><a href="uniform-distribution.html#exercise---transforming-unif01"><i class="fa fa-check"></i><b>21.5.1</b> Exercise - Transforming UNIF(0,1)</a></li>
+<li class="chapter" data-level="21.5.2" data-path="uniform-distribution.html"><a href="uniform-distribution.html#exercise---showing-up-for-class"><i class="fa fa-check"></i><b>21.5.2</b> Exercise - Showing Up for Class</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="exponential-distribution.html"><a href="exponential-distribution.html"><i class="fa fa-check"></i><b>22</b> The Exponential Distribution</a><ul>
+<li class="chapter" data-level="22.1" data-path="probability-basics.html"><a href="probability-basics.html#introduction"><i class="fa fa-check"></i><b>22.1</b> Introduction</a></li>
+<li class="chapter" data-level="22.2" data-path="exponential-distribution.html"><a href="exponential-distribution.html#the-exponential-distribution"><i class="fa fa-check"></i><b>22.2</b> The Exponential Distribution</a><ul>
+<li class="chapter" data-level="22.2.1" data-path="exponential-distribution.html"><a href="exponential-distribution.html#the-exponential-probability-density-function"><i class="fa fa-check"></i><b>22.2.1</b> The Exponential Probability Density Function</a></li>
+<li class="chapter" data-level="22.2.2" data-path="exponential-distribution.html"><a href="exponential-distribution.html#the-exponential-random-variable-in-r"><i class="fa fa-check"></i><b>22.2.2</b> The Exponential Random Variable in R</a></li>
+<li class="chapter" data-level="22.2.3" data-path="exponential-distribution.html"><a href="exponential-distribution.html#example---soccer-wait-times"><i class="fa fa-check"></i><b>22.2.3</b> Example - Soccer Wait Times</a></li>
+<li class="chapter" data-level="22.2.4" data-path="exponential-distribution.html"><a href="exponential-distribution.html#example---the-computer-help-desk"><i class="fa fa-check"></i><b>22.2.4</b> Example - The Computer Help Desk</a></li>
+</ul></li>
+<li class="chapter" data-level="22.3" data-path="probability-basics.html"><a href="probability-basics.html#exercises"><i class="fa fa-check"></i><b>22.3</b> Exercises</a><ul>
+<li class="chapter" data-level="22.3.1" data-path="exponential-distribution.html"><a href="exponential-distribution.html#exercise---waiting-on-that-earthquake"><i class="fa fa-check"></i><b>22.3.1</b> Exercise - Waiting on that Earthquake</a></li>
+<li class="chapter" data-level="22.3.2" data-path="exponential-distribution.html"><a href="exponential-distribution.html#exercise---nhl-hockey-goals"><i class="fa fa-check"></i><b>22.3.2</b> Exercise - NHL Hockey Goals</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html"><i class="fa fa-check"></i><b>23</b> Monte Carlo Simulation</a><ul>
+<li class="chapter" data-level="23.1" data-path="probability-basics.html"><a href="probability-basics.html#introduction"><i class="fa fa-check"></i><b>23.1</b> Introduction</a></li>
+<li class="chapter" data-level="23.2" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html#chapter_scenario_random_darts"><i class="fa fa-check"></i><b>23.2</b> Chapter Scenario - Random Darts</a></li>
+<li class="chapter" data-level="23.3" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html#about-random-number-generators"><i class="fa fa-check"></i><b>23.3</b> About Random Number Generators</a></li>
+<li class="chapter" data-level="23.4" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html#chapter_scenario_revisited_random_darts"><i class="fa fa-check"></i><b>23.4</b> Chapter Scenario Revisited - Random Darts</a></li>
+<li class="chapter" data-level="23.5" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html#example---the-holey-cube"><i class="fa fa-check"></i><b>23.5</b> Example - The Holey Cube</a></li>
+<li class="chapter" data-level="23.6" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html#simulating-the-cube"><i class="fa fa-check"></i><b>23.6</b> Simulating The Cube</a></li>
+<li class="chapter" data-level="23.7" data-path="probability-basics.html"><a href="probability-basics.html#exercises"><i class="fa fa-check"></i><b>23.7</b> Exercises</a><ul>
+<li class="chapter" data-level="23.7.1" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html#exercise---city-grid"><i class="fa fa-check"></i><b>23.7.1</b> Exercise - City Grid</a></li>
+<li class="chapter" data-level="23.7.2" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html#exercise---a-big-bead"><i class="fa fa-check"></i><b>23.7.2</b> Exercise - A Big Bead</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="case-study-roulette.html"><a href="case-study-roulette.html"><i class="fa fa-check"></i><b>24</b> Case Study - Roulette</a><ul>
+<li class="chapter" data-level="24.1" data-path="case-study-roulette.html"><a href="case-study-roulette.html#chapter_scenario_conservative_or_playa"><i class="fa fa-check"></i><b>24.1</b> Chapter Scenario - Conservative or Playa?</a></li>
+<li class="chapter" data-level="24.2" data-path="case-study-roulette.html"><a href="case-study-roulette.html#the_rules_of_roulette"><i class="fa fa-check"></i><b>24.2</b> The Rules of Roulette</a></li>
+<li class="chapter" data-level="24.3" data-path="case-study-roulette.html"><a href="case-study-roulette.html#analyzing_the_even_money_bets"><i class="fa fa-check"></i><b>24.3</b> Analyzing the Even-Money Bets</a></li>
+<li class="chapter" data-level="24.4" data-path="case-study-roulette.html"><a href="case-study-roulette.html#roulette_simulation"><i class="fa fa-check"></i><b>24.4</b> Roulette Simulation</a></li>
+<li class="chapter" data-level="24.5" data-path="case-study-roulette.html"><a href="case-study-roulette.html#analyzing_the_single_number_bet"><i class="fa fa-check"></i><b>24.5</b> Analyzing the Single Number Bet</a></li>
+<li class="chapter" data-level="24.6" data-path="probability-basics.html"><a href="probability-basics.html#exercises"><i class="fa fa-check"></i><b>24.6</b> Exercises</a><ul>
+<li class="chapter" data-level="24.6.1" data-path="case-study-roulette.html"><a href="case-study-roulette.html#exercise---four-and-five-number-bets"><i class="fa fa-check"></i><b>24.6.1</b> Exercise - Four and Five Number Bets</a></li>
+<li class="chapter" data-level="24.6.2" data-path="case-study-roulette.html"><a href="case-study-roulette.html#exercise---simulating-a-roulette-bet"><i class="fa fa-check"></i><b>24.6.2</b> Exercise - Simulating a Roulette Bet</a></li>
+<li class="chapter" data-level="24.6.3" data-path="case-study-roulette.html"><a href="case-study-roulette.html#exercise---the-rule-of-36"><i class="fa fa-check"></i><b>24.6.3</b> Exercise - The Rule of 36</a></li>
+<li class="chapter" data-level="24.6.4" data-path="case-study-roulette.html"><a href="case-study-roulette.html#exercise---european-roulette"><i class="fa fa-check"></i><b>24.6.4</b> Exercise - European Roulette</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="case-study-craps.html"><a href="case-study-craps.html"><i class="fa fa-check"></i><b>25</b> Case Study - Craps</a><ul>
+<li class="chapter" data-level="25.1" data-path="case-study-craps.html"><a href="case-study-craps.html#chapter_scenario_getting_six_the_hard_way"><i class="fa fa-check"></i><b>25.1</b> Chapter Scenario - Getting Six the Hard Way</a></li>
+<li class="chapter" data-level="25.2" data-path="case-study-craps.html"><a href="case-study-craps.html#single_roll_craps_bets"><i class="fa fa-check"></i><b>25.2</b> Single Roll Craps Bets</a></li>
+<li class="chapter" data-level="25.3" data-path="case-study-craps.html"><a href="case-study-craps.html#the_craps_passline_bet_explained"><i class="fa fa-check"></i><b>25.3</b> The Craps Passline Bet Explained</a></li>
+<li class="chapter" data-level="25.4" data-path="case-study-craps.html"><a href="case-study-craps.html#chapter_scenario_revisited_getting_six_the_hard_way"><i class="fa fa-check"></i><b>25.4</b> Chapter Scenario Revisited - Getting Six the Hard Way</a></li>
+<li class="chapter" data-level="25.5" data-path="probability-basics.html"><a href="probability-basics.html#exercises"><i class="fa fa-check"></i><b>25.5</b> Exercises</a><ul>
+<li class="chapter" data-level="25.5.1" data-path="case-study-craps.html"><a href="case-study-craps.html#exercise---single-roll-bet"><i class="fa fa-check"></i><b>25.5.1</b> Exercise - Single Roll Bet</a></li>
+<li class="chapter" data-level="25.5.2" data-path="case-study-craps.html"><a href="case-study-craps.html#exercise---multi-roll-bet"><i class="fa fa-check"></i><b>25.5.2</b> Exercise - Multi-roll Bet</a></li>
+<li class="chapter" data-level="25.5.3" data-path="case-study-craps.html"><a href="case-study-craps.html#exercise---the-dont-pass-bet"><i class="fa fa-check"></i><b>25.5.3</b> Exercise - The Don’t Pass Bet</a></li>
+<li class="chapter" data-level="25.5.4" data-path="case-study-craps.html"><a href="case-study-craps.html#exercise---free-odds"><i class="fa fa-check"></i><b>25.5.4</b> Exercise - Free Odds</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="case-study-poker.html"><a href="case-study-poker.html"><i class="fa fa-check"></i><b>26</b> Case Study - Poker</a><ul>
+<li class="chapter" data-level="26.1" data-path="probability-basics.html"><a href="probability-basics.html#introduction"><i class="fa fa-check"></i><b>26.1</b> Introduction</a><ul>
+<li class="chapter" data-level="26.1.1" data-path="case-study-poker.html"><a href="case-study-poker.html#the-royal-flush"><i class="fa fa-check"></i><b>26.1.1</b> The Royal Flush</a></li>
+<li class="chapter" data-level="26.1.2" data-path="case-study-poker.html"><a href="case-study-poker.html#straight-flush"><i class="fa fa-check"></i><b>26.1.2</b> Straight Flush</a></li>
+<li class="chapter" data-level="26.1.3" data-path="case-study-poker.html"><a href="case-study-poker.html#four-of-a-kind"><i class="fa fa-check"></i><b>26.1.3</b> Four of a Kind</a></li>
+<li class="chapter" data-level="26.1.4" data-path="case-study-poker.html"><a href="case-study-poker.html#full-house"><i class="fa fa-check"></i><b>26.1.4</b> Full House</a></li>
+<li class="chapter" data-level="26.1.5" data-path="case-study-poker.html"><a href="case-study-poker.html#flush"><i class="fa fa-check"></i><b>26.1.5</b> Flush</a></li>
+<li class="chapter" data-level="26.1.6" data-path="case-study-poker.html"><a href="case-study-poker.html#straight"><i class="fa fa-check"></i><b>26.1.6</b> Straight</a></li>
+<li class="chapter" data-level="26.1.7" data-path="case-study-poker.html"><a href="case-study-poker.html#three-of-a-kind"><i class="fa fa-check"></i><b>26.1.7</b> Three of a Kind</a></li>
+<li class="chapter" data-level="26.1.8" data-path="case-study-poker.html"><a href="case-study-poker.html#two-pair"><i class="fa fa-check"></i><b>26.1.8</b> Two Pair</a></li>
+<li class="chapter" data-level="26.1.9" data-path="case-study-poker.html"><a href="case-study-poker.html#one-pair"><i class="fa fa-check"></i><b>26.1.9</b> One Pair</a></li>
+<li class="chapter" data-level="26.1.10" data-path="case-study-poker.html"><a href="case-study-poker.html#high-card"><i class="fa fa-check"></i><b>26.1.10</b> High Card</a></li>
+<li class="chapter" data-level="26.1.11" data-path="case-study-poker.html"><a href="case-study-poker.html#summary-table"><i class="fa fa-check"></i><b>26.1.11</b> Summary Table</a></li>
+</ul></li>
+<li class="chapter" data-level="26.2" data-path="probability-basics.html"><a href="probability-basics.html#exercises"><i class="fa fa-check"></i><b>26.2</b> Exercises</a><ul>
+<li class="chapter" data-level="26.2.1" data-path="case-study-poker.html"><a href="case-study-poker.html#exercise---straight-flush"><i class="fa fa-check"></i><b>26.2.1</b> Exercise - Straight Flush</a></li>
+<li class="chapter" data-level="26.2.2" data-path="case-study-poker.html"><a href="case-study-poker.html#exercise---four-of-a-kind"><i class="fa fa-check"></i><b>26.2.2</b> Exercise - Four of a Kind</a></li>
+<li class="chapter" data-level="26.2.3" data-path="case-study-poker.html"><a href="case-study-poker.html#exercise---one-pair"><i class="fa fa-check"></i><b>26.2.3</b> Exercise - One Pair</a></li>
+<li class="chapter" data-level="26.2.4" data-path="case-study-poker.html"><a href="case-study-poker.html#exercise---high-card"><i class="fa fa-check"></i><b>26.2.4</b> Exercise - High Card</a></li>
+<li class="chapter" data-level="26.2.5" data-path="case-study-poker.html"><a href="case-study-poker.html#exercise---spot-the-error"><i class="fa fa-check"></i><b>26.2.5</b> Exercise - Spot the Error</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="case-study-keno.html"><a href="case-study-keno.html"><i class="fa fa-check"></i><b>27</b> Case Study - Keno</a><ul>
+<li class="chapter" data-level="27.1" data-path="case-study-keno.html"><a href="case-study-keno.html#analyzing_a_onespot_keno_ticket"><i class="fa fa-check"></i><b>27.1</b> Analyzing a One-spot Keno Ticket</a></li>
+<li class="chapter" data-level="27.2" data-path="case-study-keno.html"><a href="case-study-keno.html#analyzing_a_twospot_keno_ticket"><i class="fa fa-check"></i><b>27.2</b> Analyzing a Two-spot Keno Ticket</a></li>
+<li class="chapter" data-level="27.3" data-path="probability-basics.html"><a href="probability-basics.html#exercises"><i class="fa fa-check"></i><b>27.3</b> Exercises</a><ul>
+<li class="chapter" data-level="27.3.1" data-path="case-study-keno.html"><a href="case-study-keno.html#exercise---analyzing-a-three-spot-and-four-spot-keno-tickets"><i class="fa fa-check"></i><b>27.3.1</b> Exercise - Analyzing a Three-spot and Four-spot Keno Tickets</a></li>
+<li class="chapter" data-level="27.3.2" data-path="case-study-keno.html"><a href="case-study-keno.html#exercise---changing-perspectives"><i class="fa fa-check"></i><b>27.3.2</b> Exercise - Changing Perspectives</a></li>
+<li class="chapter" data-level="27.3.3" data-path="case-study-keno.html"><a href="case-study-keno.html#exercise-group-project---complete-analysis-of-keno"><i class="fa fa-check"></i><b>27.3.3</b> Exercise (Group Project) - Complete Analysis of Keno</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="case-study-powerball-lottery.html"><a href="case-study-powerball-lottery.html"><i class="fa fa-check"></i><b>28</b> Case Study - Powerball Lottery</a><ul>
+<li class="chapter" data-level="28.1" data-path="probability-basics.html"><a href="probability-basics.html#introduction"><i class="fa fa-check"></i><b>28.1</b> Introduction</a></li>
+<li class="chapter" data-level="28.2" data-path="case-study-powerball-lottery.html"><a href="case-study-powerball-lottery.html#ways_to_win_powerball"><i class="fa fa-check"></i><b>28.2</b> Ways to Win Powerball</a><ul>
+<li class="chapter" data-level="28.2.1" data-path="case-study-powerball-lottery.html"><a href="case-study-powerball-lottery.html#winning-powerball-with-five-white"><i class="fa fa-check"></i><b>28.2.1</b> Winning Powerball with Five White</a></li>
+<li class="chapter" data-level="28.2.2" data-path="case-study-powerball-lottery.html"><a href="case-study-powerball-lottery.html#winning-powerball-with-four-white-powerball"><i class="fa fa-check"></i><b>28.2.2</b> Winning Powerball with Four White + Powerball</a></li>
+<li class="chapter" data-level="28.2.3" data-path="case-study-powerball-lottery.html"><a href="case-study-powerball-lottery.html#winning-powerball-with-four-white"><i class="fa fa-check"></i><b>28.2.3</b> Winning Powerball with Four White</a></li>
+<li class="chapter" data-level="28.2.4" data-path="case-study-powerball-lottery.html"><a href="case-study-powerball-lottery.html#winning-powerball-with-three-white-powerball"><i class="fa fa-check"></i><b>28.2.4</b> Winning Powerball with Three White + Powerball</a></li>
+<li class="chapter" data-level="28.2.5" data-path="case-study-powerball-lottery.html"><a href="case-study-powerball-lottery.html#winning-powerball-with-three-white"><i class="fa fa-check"></i><b>28.2.5</b> Winning Powerball with Three White</a></li>
+<li class="chapter" data-level="28.2.6" data-path="case-study-powerball-lottery.html"><a href="case-study-powerball-lottery.html#winning-powerball-with-two-white-powerball"><i class="fa fa-check"></i><b>28.2.6</b> Winning Powerball with Two White + Powerball</a></li>
+<li class="chapter" data-level="28.2.7" data-path="case-study-powerball-lottery.html"><a href="case-study-powerball-lottery.html#winning-powerball-with-one-white-powerball"><i class="fa fa-check"></i><b>28.2.7</b> Winning Powerball with One White + Powerball</a></li>
+<li class="chapter" data-level="28.2.8" data-path="case-study-powerball-lottery.html"><a href="case-study-powerball-lottery.html#winning-powerball-with-powerball-only"><i class="fa fa-check"></i><b>28.2.8</b> Winning Powerball with Powerball Only</a></li>
+</ul></li>
+<li class="chapter" data-level="28.3" data-path="case-study-powerball-lottery.html"><a href="case-study-powerball-lottery.html#the-expected-value-of-powerball"><i class="fa fa-check"></i><b>28.3</b> The Expected Value of Powerball</a></li>
+<li class="chapter" data-level="28.4" data-path="case-study-powerball-lottery.html"><a href="case-study-powerball-lottery.html#looking_for_a_winner"><i class="fa fa-check"></i><b>28.4</b> Looking for a Winner</a></li>
+<li class="chapter" data-level="28.5" data-path="probability-basics.html"><a href="probability-basics.html#exercises"><i class="fa fa-check"></i><b>28.5</b> Exercises</a><ul>
+<li class="chapter" data-level="28.5.1" data-path="case-study-powerball-lottery.html"><a href="case-study-powerball-lottery.html#exercise---ways-to-win-powerball"><i class="fa fa-check"></i><b>28.5.1</b> Exercise - Ways to Win Powerball</a></li>
+<li class="chapter" data-level="28.5.2" data-path="case-study-powerball-lottery.html"><a href="case-study-powerball-lottery.html#exercise---can-i-get-a-winner"><i class="fa fa-check"></i><b>28.5.2</b> Exercise - Can I Get a Winner?</a></li>
+<li class="chapter" data-level="28.5.3" data-path="case-study-powerball-lottery.html"><a href="case-study-powerball-lottery.html#exercise---today-522-million-dollar-jackpot"><i class="fa fa-check"></i><b>28.5.3</b> Exercise - Today: 522 Million Dollar Jackpot</a></li>
+<li class="chapter" data-level="28.5.4" data-path="case-study-powerball-lottery.html"><a href="case-study-powerball-lottery.html#exercise---think-positive-expectation"><i class="fa fa-check"></i><b>28.5.4</b> Exercise - Think Positive Expectation</a></li>
+<li class="chapter" data-level="28.5.5" data-path="case-study-powerball-lottery.html"><a href="case-study-powerball-lottery.html#exercise---thinking-about-dependencies"><i class="fa fa-check"></i><b>28.5.5</b> Exercise - Thinking about Dependencies</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="case-study-bingo.html"><a href="case-study-bingo.html"><i class="fa fa-check"></i><b>29</b> Case Study - BINGO</a><ul>
+<li class="chapter" data-level="29.1" data-path="case-study-bingo.html"><a href="case-study-bingo.html#chapter_scenario_bingo_on_the_fun_bus"><i class="fa fa-check"></i><b>29.1</b> Chapter Scenario - BINGO on the Fun Bus</a></li>
+<li class="chapter" data-level="29.2" data-path="case-study-bingo.html"><a href="case-study-bingo.html#bingo_basics"><i class="fa fa-check"></i><b>29.2</b> Bingo Basics</a></li>
+<li class="chapter" data-level="29.3" data-path="case-study-bingo.html"><a href="case-study-bingo.html#winning_bingo_with_m_numbers_called"><i class="fa fa-check"></i><b>29.3</b> Winning Bingo with m Numbers Called</a></li>
+<li class="chapter" data-level="29.4" data-path="case-study-bingo.html"><a href="case-study-bingo.html#chapter_scenario_revisited_bingo_on_the_fun_bus"><i class="fa fa-check"></i><b>29.4</b> Chapter Scenario Revisited - BINGO on the Fun Bus</a></li>
+<li class="chapter" data-level="29.5" data-path="probability-basics.html"><a href="probability-basics.html#exercises"><i class="fa fa-check"></i><b>29.5</b> Exercises</a><ul>
+<li class="chapter" data-level="29.5.1" data-path="case-study-bingo.html"><a href="case-study-bingo.html#exercise---unique-bingo-cards"><i class="fa fa-check"></i><b>29.5.1</b> Exercise - Unique BINGO Cards</a></li>
+<li class="chapter" data-level="29.5.2" data-path="case-study-bingo.html"><a href="case-study-bingo.html#exercise---win-with-seven"><i class="fa fa-check"></i><b>29.5.2</b> Exercise - Win with Seven</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="30" data-path="genetics.html"><a href="genetics.html"><i class="fa fa-check"></i><b>30</b> Genetics</a><ul>
+<li class="chapter" data-level="30.1" data-path="genetics.html"><a href="genetics.html#appendix-1-genetics-examples"><i class="fa fa-check"></i><b>30.1</b> Appendix 1: Genetics Examples</a><ul>
+<li class="chapter" data-level="30.1.1" data-path="genetics.html"><a href="genetics.html#genetics-terminology"><i class="fa fa-check"></i><b>30.1.1</b> Genetics Terminology</a></li>
+<li class="chapter" data-level="30.1.2" data-path="genetics.html"><a href="genetics.html#genetics-basics"><i class="fa fa-check"></i><b>30.1.2</b> Genetics Basics</a></li>
+<li class="chapter" data-level="30.1.3" data-path="genetics.html"><a href="genetics.html#genetics-simulation"><i class="fa fa-check"></i><b>30.1.3</b> Genetics Simulation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Probability, Risk, and Reward</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="multiple_events" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Multiple Events</h1>
+<div id="introduction_multiple_events" class="section level2">
+<h2><span class="header-section-number">2.1</span> Introduction</h2>
+<p>After being introduced to the basic terminology of probability we want to see how it works with more complex situations and here we tackle dealing with multiple events and using the Fundamental Counting Principle.</p>
+</div>
+<div id="chapter_scenario_the_game_of_diff" class="section level2">
+<h2><span class="header-section-number">2.2</span> Chapter Scenario - The Game of Diff</h2>
+<p>Suppose the casino has hired you as a consultant to create a simple but appealing dice game. It is proposed that the player pays a certain fee and then rolls two dice. The difference between the dice is tabulated and the player receives that amount in dollars. The casino wants to know how much to charge for this game. Your job as consultant is to determine this price which, while appealing to the player, will also generate a consistent profit for the casino. Estimate what you think the average winnings for this game would be and what price would appeal to the player but also generate a consistent profit for the casino.</p>
+<div class="figure" style="text-align: center"><span id="fig:nice-fig-201"></span>
+<img src="01-basics-figures/game_of_diff_example.png" alt="Game of Diff Example" width="30%" />
+<p class="caption">
+Figure 2.1: Game of Diff Example
+</p>
+</div>
+<p>After estimating the average winnings, play the game ten times with a partner documenting the actual difference. Based on this preliminary data does it look like you made a reasonable choice for price? Why or why not?</p>
+</div>
+<div id="example---pair-of-dice" class="section level2">
+<h2><span class="header-section-number">2.3</span> Example - Pair of Dice</h2>
+<p>After working with the toss of one die in the previous chapter, we examine the outcomes when tossing two dice to explore how to handle multiple events.</p>
+<p>Earlier you examined the experiment of tossing one die. The sample space for this experiment is the set of equally likely outcomes S={1,2,3,4,5,6} and the probability of different simple and compound events can be found using this sample space.</p>
+<p>When examining two dice, one might naively consider all the different outcomes one could get when summing the dice and proceed with a possible sample space of S = {2,3,4,5,6,7,8,9,10,11,12}. You might suspect this is not a useful sample space based on experience. It seems like getting a sum of 2 or 12 is unusual but getting a sum of 7 occurs more frequently.</p>
+<p>The simulation below generates 10,000 tosses of two dice and their sum and helps us see that these sums are not equally likely and thus not a great sample space to work with.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="multiple-events.html#cb3-1"></a>die1 &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">:</span><span class="dv">6</span>, <span class="dt">size=</span><span class="dv">10000</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb3-2"><a href="multiple-events.html#cb3-2"></a>die2 &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">:</span><span class="dv">6</span>, <span class="dt">size=</span><span class="dv">10000</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb3-3"><a href="multiple-events.html#cb3-3"></a>sum &lt;-<span class="st"> </span>die1 <span class="op">+</span><span class="st"> </span>die2</span>
+<span id="cb3-4"><a href="multiple-events.html#cb3-4"></a>sim_two_dice &lt;-<span class="st"> </span><span class="kw">data.frame</span>(die1, die2, sum)</span>
+<span id="cb3-5"><a href="multiple-events.html#cb3-5"></a>knitr<span class="op">::</span><span class="kw">kable</span>(</span>
+<span id="cb3-6"><a href="multiple-events.html#cb3-6"></a>  <span class="kw">table</span>(sum), <span class="dt">caption =</span> <span class="st">&#39;Tossing Two Dice Simulation&#39;</span>,</span>
+<span id="cb3-7"><a href="multiple-events.html#cb3-7"></a>  <span class="dt">booktabs =</span> <span class="ot">TRUE</span></span>
+<span id="cb3-8"><a href="multiple-events.html#cb3-8"></a>)</span></code></pre></div>
+<table>
+<caption><span id="tab:nice-tab-202">Table 2.1: </span>Tossing Two Dice Simulation</caption>
+<thead>
+<tr class="header">
+<th align="left">sum</th>
+<th align="right">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">2</td>
+<td align="right">277</td>
+</tr>
+<tr class="even">
+<td align="left">3</td>
+<td align="right">565</td>
+</tr>
+<tr class="odd">
+<td align="left">4</td>
+<td align="right">789</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="right">1075</td>
+</tr>
+<tr class="odd">
+<td align="left">6</td>
+<td align="right">1386</td>
+</tr>
+<tr class="even">
+<td align="left">7</td>
+<td align="right">1698</td>
+</tr>
+<tr class="odd">
+<td align="left">8</td>
+<td align="right">1442</td>
+</tr>
+<tr class="even">
+<td align="left">9</td>
+<td align="right">1143</td>
+</tr>
+<tr class="odd">
+<td align="left">10</td>
+<td align="right">812</td>
+</tr>
+<tr class="even">
+<td align="left">11</td>
+<td align="right">528</td>
+</tr>
+<tr class="odd">
+<td align="left">12</td>
+<td align="right">285</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="multiple-events.html#cb4-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>sim_two_dice, <span class="kw">aes</span>(<span class="dt">x=</span>sum)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">y=</span>..density..), <span class="dt">binwidth =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:nice-fig-203"></span>
+<img src="probriskreward-bookdown_files/figure-html/nice-fig-203-1.png" alt="Histogram for Tossing Two Dice" width="80%" />
+<p class="caption">
+Figure 2.2: Histogram for Tossing Two Dice
+</p>
+</div>
+<p>It is often helpful to clarify a probability experiment and its sample space by making an artificial distinction. Pretend the dice are different colors, say, the first die white and the second die black. This allows us to distinguish between the individual outcomes on each die. Given that the six different outcomes on each side are equally likely, the resulting <span class="math inline">\(6 \cdot 6 = 36\)</span> outcomes illustrated in the table below provides a sample space of equally likely outcomes from which to find the probability of events you are interested in.</p>
+<p>Since there are 6 ways to roll the first white die and 6 ways to roll the second black die there are <span class="math inline">\(6 \cdot 6 = 36\)</span> ways to roll both dice. This insight uses the Fundamental Counting Principle described below:</p>
+</div>
+<div id="fundamental_counting_principle" class="section level2">
+<h2><span class="header-section-number">2.4</span> Fundamental Counting Principle</h2>
+<p>Consider a multi-step process requiring k steps. If Step1 can be done <span class="math inline">\(n_{1}\)</span> ways, Step2 done $n_{2} ways, and so on up to Step k being done $n_{k} ways, then the total number of ways the entire process can be done <span class="math inline">\(n_{1} \cdot n_{2} \cdot ... \cdot n_{k}\)</span> ways.</p>
+<p>Furthermore, since all outcomes on each individual die are equally likely these 36 possibilities represent equally likely outcomes for the experiment of tossing two dice. We can use this sample space to answer some questions.</p>
+<div class="figure" style="text-align: center"><span id="fig:nice-fig-204"></span>
+<img src="01-basics-figures/two_dice_sample_space.png" alt="Sample Space for Two Dice" width="60%" />
+<p class="caption">
+Figure 2.3: Sample Space for Two Dice
+</p>
+</div>
+<p>For example, there is only one combination of dice that yields a sum of 2 (that is 1+1) and there is only one combination of dice that yields a sum of 3 (that is 1+2) but a sum of 3 is twice as likely because when we distinguish the dice we see 1+2 and 2+1 as distinct options and we get <span class="math inline">\(P(sum=2)=1/36\)</span> while <span class="math inline">\(P(sum=3)=2/36\)</span>.</p>
+<p>Let’s try another one: which is more likely, a sum of 6 or a sum of 7? From the sample space we see five ways to obtain a 6 and six ways to obtain a 7 indicating a sum of 7 is more likely. Stated as probabilities, <span class="math inline">\(P(sum=6)=5/36\)</span> and <span class="math inline">\(P(sum=7)=6/36\)</span>.</p>
+<div id="practice" class="section level3">
+<h3><span class="header-section-number">2.4.1</span> Practice</h3>
+<p>Which is more likely when tossing two dice, a sum of 3 or a sum of 11? Explain.</p>
+<p>Simply by counting successes in the sample space we find the probability of compound events.</p>
+<p>Let’s define a few events for this experiment of tossing two dice and find the probabilities of related compound events.</p>
+<p>E: The sum is even.
+F: The sum is less than or equal to 5.</p>
+<p>It is helpful to identify members of the sample space satisfying each event.</p>
+<div class="figure" style="text-align: center"><span id="fig:nice-fig-205"></span>
+<img src="01-basics-figures/two_dice_sample_space_with_events.png" alt="Sample Space for Two Dice with Events E and F" width="60%" />
+<p class="caption">
+Figure 2.4: Sample Space for Two Dice with Events E and F
+</p>
+</div>
+<p>We see <span class="math inline">\(P(E)=18/36=1/2=0.5\)</span> and also note <span class="math inline">\(P(not \ E)=18/36=1/2=0.5\)</span>.
+From the sample space, <span class="math inline">\(P(F)=10/36\)</span> and <span class="math inline">\(P(not \ F)=26/36\)</span>.</p>
+<p>Looking at compound events, recall that <strong>AND</strong> refers to the overlap where both events are true so <span class="math inline">\(P(E \ and \ F)=4/36\)</span>.</p>
+<p>We think of <strong>OR</strong> as an inclusive or representing the event one or the other or both occur. Counting unique elements of the sample space that are either an even sum or a sum less than or equal to five we see <span class="math inline">\(P(E \ or \ F)=24/36\)</span>.</p>
+<p>Conditional probability is trickier. <span class="math inline">\(P(E \mid F)\)</span> means the probability that the sum is even given we know the sum is less than or equal to five. To handle this, we assume the sum is less than or equal to five and this narrows down our sample space to 10 possibilities of which 4 have an even sum yielding <span class="math inline">\(P(E \mid F)=4/10\)</span>.</p>
+<div class="figure" style="text-align: center"><span id="fig:nice-fig-206"></span>
+<img src="01-basics-figures/two_dice_sample_space_given_F.png" alt="Sample Space for Two Dice Given F" width="60%" />
+<p class="caption">
+Figure 2.5: Sample Space for Two Dice Given F
+</p>
+</div>
+<p>It means something quite different to consider <span class="math inline">\(P(F \mid E)\)</span>, the probability the sum is less than or equal to five given it is even. Out of the 18 even sums, we find 4 of them are less than or equal to five yielding <span class="math inline">\(P(F \mid E)=4/18\)</span>.</p>
+<div class="figure" style="text-align: center"><span id="fig:nice-fig-207"></span>
+<img src="01-basics-figures/two_dice_sample_space_given_E.png" alt="Sample Space for Two Dice Given E" width="60%" />
+<p class="caption">
+Figure 2.6: Sample Space for Two Dice Given E
+</p>
+</div>
+<p>It is important to note we found all of the probabilities above by focusing on the meaning of the events rather than some fancy formula.</p>
+</div>
+<div id="practice-1" class="section level3">
+<h3><span class="header-section-number">2.4.2</span> Practice</h3>
+<p>For the experiment of tossing two dice with the event D being the sum is odd and the event T being at least one of the dice is a three find P(D), P(T), P(not D), P(not T), P(D and T), P(D or T), P(D|T), and P(T|D).</p>
+</div>
+</div>
+<div id="example_galileo_dice_problem" class="section level2">
+<h2><span class="header-section-number">2.5</span> Example - Galileo’s Dice Problem</h2>
+<p>In Galileo’s day, a clear understanding of probability was still being developed. While Galileo is well-known for his work on inventing the telescope and pointing it for the first time at the moon, his experimental approach to understanding the physics of motion dropping objects from the Tower of Pisa, and, most famously, his advocation of the Copernican planetary model and his subsequent condemnation by church authority, Galileo was also exploring the fundamental notions of chance.</p>
+<p>The king approached Galileo for help with a mathematical problem. There was a gambling game involving tossing three dice. According to conventional reasoning a sum of nine should occur with the same frequency as a sum of ten because there were an equal number of ways to obtain each. There were six dice combinations to obtain a sum of 9 - 1+2+6, 1+3+5, 1+4+4, 2+2+5, 2+3+4, and 3+3+3. Similarly, there were six dice combinations to obtain a sum of 10 - 1+3+6, 1+4+5, 2+2+6, 2+3+5, 2+4+4, and 3+3+4.</p>
+<p>However, it had been observed that a sum of ten occurred more frequently than a sum of nine. While not thrilled to divert his attention to solving the king’s problems, Galileo nevertheless looked into the issue and thereby advanced the theory of probability. We can walk in Galileo’s footsteps and discover why the theory of the time and the real-world experience did not agree?</p>
+<p>To see how Galileo solved this problem we need to absorb the lesson of creating a helpful artificial distinction. Let’s pretend we can tell the dice apart.</p>
+<p>First of all, since there are 6 equally likely outcomes on each die, there are <span class="math inline">\(6 \cdot 6 \cdot 6=216\)</span> total equally likely outcomes in the sample space.</p>
+<p>Let’s examine the different combinations of 9 and 10 in the light of distinguishable dice where order matters.</p>
+<p>Sum of Nine</p>
+<ul>
+<li>Combo 1+2+6 - Orderings 1+2+6, 1+6+2, 2+1+6, 2+6+1, 6+1+2, 6+2+1</li>
+<li>Combo 1+3+5 - Orderings 1+3+5, 1+5+3, 3+1+5, 3+5+1, 5+1+3, 5+3+1</li>
+<li>Combo 1+4+4 - Orderings 1+4+4, 4+1+4, 4+4+1</li>
+<li>Combo 2+2+5 - Orderings 2+2+5, 2+5+2, 5+2+2</li>
+<li>Combo 2+3+4 - Orderings 2+3+4, 2+4+3, 3+2+4, 3+4+2, 4+2+3, 4+3+2</li>
+<li>Combo 3+3+3 - Orderings 3+3+3</li>
+</ul>
+<p>Sum of Ten</p>
+<ul>
+<li>Combo 1+3+6 - Orderings 1+3+6, 1+6+3, 3+1+6, 3+6+1, 6+1+3, 6+3+1</li>
+<li>Combo 1+4+5 - Orderings 1+4+5, 1+5+4, 4+1+5, 4+5+1, 5+1+4, 5+4+1</li>
+<li>Combo 2+2+6 - Orderings 2+2+6, 2+6+2, 6+2+2</li>
+<li>Combo 2+3+5 - Orderings 2+3+5, 2+5+3, 3+2+5, 3+5+2, 5+2+3, 5+3+2</li>
+<li>Combo 2+4+4 - Orderings 2+4+4, 4+2+4, 4+4+2</li>
+<li>Combo 3+3+4 - Orderings 3+3+4, 3+4+3, 4+3+3</li>
+</ul>
+<p>Tallying the orderings we see there are 25 orderings yielding a sum of 9 and 27 yielding a sum of 10 thus <span class="math inline">\(P(sum=9)=25/216=0.116\)</span> while <span class="math inline">\(P(sum=10)=27/216=0.125\)</span> confirming the real-world experience that a sum of 10 is actually more likely than a sum of 9.</p>
+<p>A simulation might reinforce this. We simulate the sum of 10,000 tosses of three dice and examine the frequency table of results.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="multiple-events.html#cb5-1"></a>die1 &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">:</span><span class="dv">6</span>, <span class="dt">size=</span><span class="dv">10000</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb5-2"><a href="multiple-events.html#cb5-2"></a>die2 &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">:</span><span class="dv">6</span>, <span class="dt">size=</span><span class="dv">10000</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb5-3"><a href="multiple-events.html#cb5-3"></a>die3 &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">:</span><span class="dv">6</span>, <span class="dt">size=</span><span class="dv">10000</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb5-4"><a href="multiple-events.html#cb5-4"></a>sum3 &lt;-<span class="st"> </span>die1 <span class="op">+</span><span class="st"> </span>die2 <span class="op">+</span><span class="st"> </span>die3</span>
+<span id="cb5-5"><a href="multiple-events.html#cb5-5"></a>sim_three_dice &lt;-<span class="st"> </span><span class="kw">data.frame</span>(die1, die2, die3, sum3)</span>
+<span id="cb5-6"><a href="multiple-events.html#cb5-6"></a>knitr<span class="op">::</span><span class="kw">kable</span>(</span>
+<span id="cb5-7"><a href="multiple-events.html#cb5-7"></a>  <span class="kw">table</span>(sum3), <span class="dt">caption =</span> <span class="st">&#39;Tossing Three Dice Simulation&#39;</span>,</span>
+<span id="cb5-8"><a href="multiple-events.html#cb5-8"></a>  <span class="dt">booktabs =</span> <span class="ot">TRUE</span></span>
+<span id="cb5-9"><a href="multiple-events.html#cb5-9"></a>)</span></code></pre></div>
+<table>
+<caption><span id="tab:nice-tab-208">Table 2.2: </span>Tossing Three Dice Simulation</caption>
+<thead>
+<tr class="header">
+<th align="left">sum3</th>
+<th align="right">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">3</td>
+<td align="right">45</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="right">136</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="right">277</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="right">451</td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="right">704</td>
+</tr>
+<tr class="even">
+<td align="left">8</td>
+<td align="right">971</td>
+</tr>
+<tr class="odd">
+<td align="left">9</td>
+<td align="right">1156</td>
+</tr>
+<tr class="even">
+<td align="left">10</td>
+<td align="right">1197</td>
+</tr>
+<tr class="odd">
+<td align="left">11</td>
+<td align="right">1301</td>
+</tr>
+<tr class="even">
+<td align="left">12</td>
+<td align="right">1159</td>
+</tr>
+<tr class="odd">
+<td align="left">13</td>
+<td align="right">960</td>
+</tr>
+<tr class="even">
+<td align="left">14</td>
+<td align="right">688</td>
+</tr>
+<tr class="odd">
+<td align="left">15</td>
+<td align="right">455</td>
+</tr>
+<tr class="even">
+<td align="left">16</td>
+<td align="right">270</td>
+</tr>
+<tr class="odd">
+<td align="left">17</td>
+<td align="right">178</td>
+</tr>
+<tr class="even">
+<td align="left">18</td>
+<td align="right">52</td>
+</tr>
+</tbody>
+</table>
+<p>We can examine the relative frequencies.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="multiple-events.html#cb6-1"></a>knitr<span class="op">::</span><span class="kw">kable</span>(</span>
+<span id="cb6-2"><a href="multiple-events.html#cb6-2"></a>  <span class="kw">prop.table</span>(<span class="kw">table</span>(sum3)), <span class="dt">caption =</span> <span class="st">&#39;Relative Frequencies for Tossing Three Dice Simulation&#39;</span>,</span>
+<span id="cb6-3"><a href="multiple-events.html#cb6-3"></a>  <span class="dt">booktabs =</span> <span class="ot">TRUE</span></span>
+<span id="cb6-4"><a href="multiple-events.html#cb6-4"></a>)</span></code></pre></div>
+<table>
+<caption><span id="tab:nice-tab-209">Table 2.3: </span>Relative Frequencies for Tossing Three Dice Simulation</caption>
+<thead>
+<tr class="header">
+<th align="left">sum3</th>
+<th align="right">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">3</td>
+<td align="right">0.0045</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="right">0.0136</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="right">0.0277</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="right">0.0451</td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="right">0.0704</td>
+</tr>
+<tr class="even">
+<td align="left">8</td>
+<td align="right">0.0971</td>
+</tr>
+<tr class="odd">
+<td align="left">9</td>
+<td align="right">0.1156</td>
+</tr>
+<tr class="even">
+<td align="left">10</td>
+<td align="right">0.1197</td>
+</tr>
+<tr class="odd">
+<td align="left">11</td>
+<td align="right">0.1301</td>
+</tr>
+<tr class="even">
+<td align="left">12</td>
+<td align="right">0.1159</td>
+</tr>
+<tr class="odd">
+<td align="left">13</td>
+<td align="right">0.0960</td>
+</tr>
+<tr class="even">
+<td align="left">14</td>
+<td align="right">0.0688</td>
+</tr>
+<tr class="odd">
+<td align="left">15</td>
+<td align="right">0.0455</td>
+</tr>
+<tr class="even">
+<td align="left">16</td>
+<td align="right">0.0270</td>
+</tr>
+<tr class="odd">
+<td align="left">17</td>
+<td align="right">0.0178</td>
+</tr>
+<tr class="even">
+<td align="left">18</td>
+<td align="right">0.0052</td>
+</tr>
+</tbody>
+</table>
+<p>Are the relative frequencies for obtaining a sum of 9 and for obtaining a sum of 10 similar to what theory suggests?</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="multiple-events.html#cb7-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>sim_three_dice, <span class="kw">aes</span>(<span class="dt">x=</span>sum3)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">y=</span>..density..), <span class="dt">binwidth =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:nice-fig-210"></span>
+<img src="probriskreward-bookdown_files/figure-html/nice-fig-210-1.png" alt="Histogram for Tossing Three Dice" width="80%" />
+<p class="caption">
+Figure 2.7: Histogram for Tossing Three Dice
+</p>
+</div>
+<p>Although the difference is small, attentive human eyes observed it and persistent inquiring minds found the theory needed to explain it. This is often the way knowledge develops - from careful observation about in the world to an explanatory mathematical model.</p>
+</div>
+<div id="chapter_scenario_revisited_the_game_of_diff" class="section level2">
+<h2><span class="header-section-number">2.6</span> Chapter Scenario Revisited - The Game of Diff</h2>
+<p>In the Game of Diff the player pays a certain fee and then rolls two dice and wins in dollars the difference. We can run an R simulation tossing two dice and computing the difference a large number of times to get a better sense of expected winnings.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="multiple-events.html#cb8-1"></a><span class="co"># Simulate 10000 die tosses and the difference and put in a data frame</span></span>
+<span id="cb8-2"><a href="multiple-events.html#cb8-2"></a>die1 &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>, <span class="dv">10000</span>, <span class="dt">replace=</span><span class="ot">TRUE</span>)</span>
+<span id="cb8-3"><a href="multiple-events.html#cb8-3"></a>die2 &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>, <span class="dv">10000</span>, <span class="dt">replace=</span><span class="ot">TRUE</span>)</span>
+<span id="cb8-4"><a href="multiple-events.html#cb8-4"></a>diff &lt;-<span class="st"> </span><span class="kw">abs</span>(die1 <span class="op">-</span><span class="st"> </span>die2)</span>
+<span id="cb8-5"><a href="multiple-events.html#cb8-5"></a>diff_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(die1, die2, diff)</span>
+<span id="cb8-6"><a href="multiple-events.html#cb8-6"></a><span class="kw">head</span>(diff_data)</span></code></pre></div>
+<pre><code>##   die1 die2 diff
+## 1    4    6    2
+## 2    3    1    2
+## 3    2    3    1
+## 4    6    1    5
+## 5    2    3    1
+## 6    2    5    3</code></pre>
+<p>We tabulate the simulation results with a frequency table and a relative frequency table.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="multiple-events.html#cb10-1"></a><span class="kw">table</span>(diff_data<span class="op">$</span>diff)</span></code></pre></div>
+<pre><code>## 
+##    0    1    2    3    4    5 
+## 1639 2793 2216 1726 1102  524</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="multiple-events.html#cb12-1"></a><span class="kw">prop.table</span>(<span class="kw">table</span>(diff_data<span class="op">$</span>diff))</span></code></pre></div>
+<pre><code>## 
+##      0      1      2      3      4      5 
+## 0.1639 0.2793 0.2216 0.1726 0.1102 0.0524</code></pre>
+<p>We can visualize the differences with a histogram.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="multiple-events.html#cb14-1"></a><span class="kw">ggplot</span>(diff_data, <span class="kw">aes</span>(<span class="dt">x=</span>diff)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span><span class="dv">1</span>)</span></code></pre></div>
+<p><img src="probriskreward-bookdown_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>What was the most common difference? What was the least common difference? Computing summary statistics provides important information.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="multiple-events.html#cb15-1"></a>diff_stats &lt;-<span class="st"> </span><span class="kw">favstats</span>(diff)</span>
+<span id="cb15-2"><a href="multiple-events.html#cb15-2"></a>diff_stats</span></code></pre></div>
+<pre><code>##  min Q1 median Q3 max   mean       sd     n missing
+##    0  1      2  3   5 1.9431 1.420163 10000       0</code></pre>
+<p>The mean difference based on the simulation of 10,000 trials is 1.9431. How do these results compare with theory. Now, we find the mean value for the Game of Diff using our traditional, theoretical analysis.</p>
+<p>With two dice being tossed we want to start with the sample space of the 36 equally likely outcomes. We complete the table by identifying the value of the difference over these outcomes.</p>
+<div class="figure" style="text-align: center"><span id="fig:nice-fig-211"></span>
+<img src="01-basics-figures/game_of_diff_table.png" alt="Table for the Difference of Two Dice" width="60%" />
+<p class="caption">
+Figure 2.8: Table for the Difference of Two Dice
+</p>
+</div>
+<p>By counting the number of occurrences of each possible difference we find the probability distribution for X, the difference of two dice.</p>
+<div class="figure" style="text-align: center"><span id="fig:nice-fig-212"></span>
+<img src="01-basics-figures/game_of_diff_prob_dist.png" alt="Probability Distribution for the Difference of Two Dice" width="30%" />
+<p class="caption">
+Figure 2.9: Probability Distribution for the Difference of Two Dice
+</p>
+</div>
+<p>Based on the table, we can find and input the probability distribution and compute the mean/expected value using R.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="multiple-events.html#cb17-1"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
+<span id="cb17-2"><a href="multiple-events.html#cb17-2"></a>probs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">6</span><span class="op">/</span><span class="dv">36</span>, <span class="dv">10</span><span class="op">/</span><span class="dv">36</span>, <span class="dv">8</span><span class="op">/</span><span class="dv">36</span>, <span class="dv">6</span><span class="op">/</span><span class="dv">36</span>, <span class="dv">4</span><span class="op">/</span><span class="dv">36</span>, <span class="dv">2</span><span class="op">/</span><span class="dv">36</span>)</span>
+<span id="cb17-3"><a href="multiple-events.html#cb17-3"></a>expectation_diff &lt;-<span class="st"> </span><span class="kw">sum</span>(x<span class="op">*</span>probs)</span>
+<span id="cb17-4"><a href="multiple-events.html#cb17-4"></a>expectation_diff</span></code></pre></div>
+<pre><code>## [1] 1.944444</code></pre>
+<p>The true expected value for the game of diff is 1.9444444. How close was the sample mean generated from simulation to the true mean found by the expected value formula? We know, in the long run, the sample mean will approach the true, theoretical expected value.</p>
+<p>Accordingly, based on the simulation results and theoretical results above, what you would now recommend for the price of the game including how much money you would predict the casino would make per game and the house advantage as a percentage. Of course, you need to balance two things. First, you want to make sure you set a price that is greater than the expected value to ensure profitibility for the casino. Second, you want to the price to be competitive and still attract gamblers. What price would you recommend?</p>
+</div>
+<div id="exercises" class="section level2">
+<h2><span class="header-section-number">2.7</span> Exercises</h2>
+<div id="exercise---my-die-your-die" class="section level3">
+<h3><span class="header-section-number">2.7.1</span> Exercise - My Die, Your Die</h3>
+<p>Suppose that I toss a die and you toss a die. Find the probability of the following events.
+(a) Your die is the same result as my die.
+(b) Your die is different than my die.
+(c) Your die is greater than my die.</p>
+</div>
+<div id="exercise---three-dice" class="section level3">
+<h3><span class="header-section-number">2.7.2</span> Exercise - Three Dice</h3>
+<p>Three dice are tossed. Answer the following questions.
+(a) Which is more likely - rolling a sum of 3 or a sum of 18?
+(b) Which is more likely - rolling a sum of 4 or a sum of 17?
+(c) Which is more likely - rolling a sum of 10 or a sum of 11?
+(d) Which is more likely - rolling a sum of 10 or less or rolling a sum of 11 or more?</p>
+</div>
+<div id="exercise---de-morgans-laws" class="section level3">
+<h3><span class="header-section-number">2.7.3</span> Exercise - De Morgan’s Laws</h3>
+<p>The negation of “A or B” is “not A and not B”. The negation of “A and B” is “not A or not B”. These logical observatons are called De Morgan’s Laws. For the event of tossing two dice with A being the event of rolling doubles and B being the event of rolling a sum of seven, describe the following events verbally and find their probability.
+(a) not(A or B)
+(b) not(A and B)</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="probability-basics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tree-diagrams.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/nerdcommander/probgen-bookdown/edit/master/02-multiple_events.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["probriskreward-bookdown.pdf", "probriskreward-bookdown.epub"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
